@@ -1,12 +1,12 @@
 # Site settings
 title: My Blog
 description: A personal blog about things that interest me.
-author: jimcuene
+author: jcuene
 
 # GitHub Pages URL settings
 # Change "jimcuene" to your GitHub username
 baseurl: "" # Leave empty for username.github.io
-url: "https://jimcuene.github.io"
+url: "https://jcuene.github.io"
 
 # Build settings
 markdown: kramdown
@@ -28,9 +28,6 @@ exclude:
   - Gemfile.lock
   - README.md
   - vendor
-
-# Collections
-collections_dir: .
 
 # Defaults
 defaults:
