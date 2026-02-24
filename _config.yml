@@ -1,0 +1,45 @@
+# Site settings
+title: My Blog
+description: A personal blog about things that interest me.
+author: jimcuene
+
+# GitHub Pages URL settings
+# Change "jimcuene" to your GitHub username
+baseurl: "" # Leave empty for username.github.io
+url: "https://jimcuene.github.io"
+
+# Build settings
+markdown: kramdown
+permalink: /:year/:month/:day/:title/
+
+# Plugins (GitHub Pages supported)
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Sass
+sass:
+  style: compressed
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+
+# Collections
+collections_dir: .
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+    values:
+      layout: "page"
