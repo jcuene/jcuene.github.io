@@ -16,4 +16,4 @@ I started this site as a place to write about topics that interest me -- whether
 
 ## Get in touch
 
-The best way to reach me is through [GitHub](https://github.com/jimcuene). Feel free to open an issue or send a message.
+The best way to reach me is through [GitHub](https://github.com/jcuene). Feel free to open an issue or send a message.
