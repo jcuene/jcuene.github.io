@@ -1,0 +1,998 @@
+{
+  "trip": {
+    "id": "london-trip-001",
+    "title": "London Trip Itinerary",
+    "version": "1.0",
+    "city": "London",
+    "country": "England",
+    "nights": 9,
+    "days": 10,
+    "arrival": {
+      "day_of_week": "Friday",
+      "time_of_day": "midday"
+    },
+    "departure": {
+      "day_of_week": "Sunday",
+      "time_of_day": "unspecified"
+    },
+    "pace": "medium",
+    "themes": [
+      "British history and art",
+      "World War II history",
+      "Rock and popular music history",
+      "Food and markets",
+      "Walkable neighborhoods",
+      "Manageable transit"
+    ]
+  },
+  "days": [
+    {
+      "id": "day-01",
+      "dayNumber": 1,
+      "title": "Arrival & Easy London Walk",
+      "weekday": "Friday",
+      "summary": "Arrive, check in, and keep the first day light with an easy central London walk.",
+      "locationIds": [
+        "loc-covent-garden",
+        "loc-leicester-square",
+        "loc-trafalgar-square",
+        "loc-golden-jubilee-bridge"
+      ],
+      "diningSuggestions": [
+        "Dishoom",
+        "Hawksmoor Seven Dials",
+        "The Barbary"
+      ],
+      "notes": [
+        "Keep this day flexible depending on arrival energy.",
+        "Good first-day orientation on foot."
+      ]
+    },
+    {
+      "id": "day-02",
+      "dayNumber": 2,
+      "title": "British Museum & Bloomsbury",
+      "weekday": "Saturday",
+      "summary": "A strong opening museum day with a classic Bloomsbury walk and optional literary additions.",
+      "locationIds": [
+        "loc-british-museum",
+        "loc-bloomsbury",
+        "loc-charles-dickens-museum",
+        "loc-british-library"
+      ],
+      "diningSuggestions": [
+        "NOPI",
+        "St. John",
+        "Cinnamon Bazaar"
+      ],
+      "notes": [
+        "Suggested British Museum focus: Sutton Hoo, Rosetta Stone, British archaeology.",
+        "Optional literary stop: Dickens Museum or British Library Treasures Gallery."
+      ]
+    },
+    {
+      "id": "day-03",
+      "dayNumber": 3,
+      "title": "Westminster & WWII",
+      "weekday": "Sunday",
+      "summary": "A focused day on Churchill, Parliament, Westminster Abbey, and core national history.",
+      "locationIds": [
+        "loc-churchill-war-rooms",
+        "loc-houses-of-parliament",
+        "loc-big-ben",
+        "loc-westminster-abbey",
+        "loc-poets-corner",
+        "loc-thames-river-cruise-westminster"
+      ],
+      "diningSuggestions": [
+        "The Harwood Arms",
+        "The Palomar"
+      ],
+      "notes": [
+        "Book Churchill War Rooms in advance.",
+        "Poets’ Corner is an optional add-on inside Westminster Abbey.",
+        "River cruise is optional."
+      ]
+    },
+    {
+      "id": "day-04",
+      "dayNumber": 4,
+      "title": "Tower of London & South Bank",
+      "weekday": "Monday",
+      "summary": "Major history in the morning, food and river walking in the afternoon.",
+      "locationIds": [
+        "loc-tower-of-london",
+        "loc-borough-market",
+        "loc-south-bank",
+        "loc-millennium-bridge",
+        "loc-st-pauls-cathedral"
+      ],
+      "diningSuggestions": [
+        "Padella",
+        "El Pastor",
+        "Wright Bros"
+      ],
+      "notes": [
+        "Tower of London is a major priority site; allow at least 2 hours.",
+        "Borough Market works well for lunch."
+      ]
+    },
+    {
+      "id": "day-05",
+      "dayNumber": 5,
+      "title": "British Art & Chelsea",
+      "weekday": "Tuesday",
+      "summary": "British art in the morning followed by a slower neighborhood afternoon.",
+      "locationIds": [
+        "loc-tate-britain",
+        "loc-pimlico",
+        "loc-kings-road",
+        "loc-saatchi-gallery"
+      ],
+      "diningSuggestions": [
+        "Rabbit",
+        "The Orange",
+        "The Five Fields"
+      ],
+      "notes": [
+        "Suggested Tate Britain focus: Turner, Blake, Pre-Raphaelites.",
+        "Saatchi Gallery is optional."
+      ]
+    },
+    {
+      "id": "day-06",
+      "dayNumber": 6,
+      "title": "Rock & Popular Music Day",
+      "weekday": "Wednesday",
+      "summary": "A flexible guided or self-guided music-history day.",
+      "locationIds": [
+        "loc-abbey-road",
+        "loc-soho-music-landmarks",
+        "loc-chelsea-rolling-stones-history",
+        "loc-queen-hendrix-sites",
+        "loc-handel-and-hendrix-house",
+        "loc-denmark-street",
+        "loc-ronnie-scoutts",
+        "loc-the-100-club",
+        "loc-jazz-cafe"
+      ],
+      "diningSuggestions": [
+        "Barrafina",
+        "Blacklock Soho",
+        "The Clove Club"
+      ],
+      "notes": [
+        "This can be done as a guided tour or self-guided day.",
+        "Choose one live music venue in the evening."
+      ]
+    },
+    {
+      "id": "day-07",
+      "dayNumber": 7,
+      "title": "South Kensington Museums & Parks",
+      "weekday": "Thursday",
+      "summary": "Choose one or two museums, then use the parks for breathing room.",
+      "locationIds": [
+        "loc-v-and-a-museum",
+        "loc-natural-history-museum",
+        "loc-science-museum",
+        "loc-hyde-park",
+        "loc-kensington-gardens"
+      ],
+      "diningSuggestions": [
+        "Ottolenghi",
+        "Maggie Jones",
+        "Hereford Road"
+      ],
+      "notes": [
+        "Choose 1–2 museums rather than overloading the day.",
+        "Good recovery day after a denser run of sightseeing."
+      ]
+    },
+    {
+      "id": "day-08",
+      "dayNumber": 8,
+      "title": "Day Trip Options",
+      "weekday": "Friday",
+      "summary": "Best match is Bletchley Park; several other classic day-trip options also work well.",
+      "locationIds": [
+        "loc-bletchley-park",
+        "loc-oxford",
+        "loc-windsor",
+        "loc-brighton",
+        "loc-cambridge"
+      ],
+      "diningSuggestions": [
+        "Dinner back in London"
+      ],
+      "notes": [
+        "Bletchley Park is the strongest WWII option.",
+        "Only one of these day trips would be chosen in practice."
+      ]
+    },
+    {
+      "id": "day-09",
+      "dayNumber": 9,
+      "title": "East London Food & Markets",
+      "weekday": "Saturday",
+      "summary": "A market-and-food day with a more contemporary East London feel.",
+      "locationIds": [
+        "loc-borough-market",
+        "loc-maltby-street-market",
+        "loc-shoreditch",
+        "loc-brick-lane",
+        "loc-spitalfields-market",
+        "loc-tate-modern",
+        "loc-national-gallery"
+      ],
+      "diningSuggestions": [
+        "Lyle’s",
+        "Smoking Goat",
+        "Dishoom Shoreditch",
+        "Gunpowder"
+      ],
+      "notes": [
+        "Choose Borough Market or Maltby Street Market.",
+        "Tate Modern or National Gallery are optional adds depending on energy."
+      ]
+    },
+    {
+      "id": "day-10",
+      "dayNumber": 10,
+      "title": "Final Morning & Departure",
+      "weekday": "Sunday",
+      "summary": "A quiet final morning with a walk and brunch before departure.",
+      "locationIds": [
+        "loc-regents-park",
+        "loc-primrose-hill"
+      ],
+      "diningSuggestions": [
+        "Granger & Co",
+        "Riding House Café",
+        "Dishoom"
+      ],
+      "notes": [
+        "Keep this day light and close to departure logistics."
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "loc-covent-garden",
+      "name": "Covent Garden",
+      "type": "neighborhood",
+      "lat": 51.5117,
+      "lng": -0.124,
+      "dayIds": [
+        "day-01"
+      ],
+      "tubeStations": [
+        "Covent Garden",
+        "Leicester Square"
+      ],
+      "description": "Central, lively district with markets, theatres, cafés, and restaurants."
+    },
+    {
+      "id": "loc-leicester-square",
+      "name": "Leicester Square",
+      "type": "square",
+      "lat": 51.5105,
+      "lng": -0.1303,
+      "dayIds": [
+        "day-01"
+      ],
+      "tubeStations": [
+        "Leicester Square"
+      ],
+      "description": "Busy West End square near theaters, cinemas, and major pedestrian routes."
+    },
+    {
+      "id": "loc-trafalgar-square",
+      "name": "Trafalgar Square",
+      "type": "square",
+      "lat": 51.508,
+      "lng": -0.1281,
+      "dayIds": [
+        "day-01"
+      ],
+      "tubeStations": [
+        "Charing Cross",
+        "Leicester Square"
+      ],
+      "description": "Ceremonial central square near the National Gallery."
+    },
+    {
+      "id": "loc-golden-jubilee-bridge",
+      "name": "Golden Jubilee Bridge",
+      "type": "bridge",
+      "lat": 51.5078,
+      "lng": -0.1222,
+      "dayIds": [
+        "day-01"
+      ],
+      "tubeStations": [
+        "Embankment",
+        "Charing Cross",
+        "Waterloo"
+      ],
+      "description": "Pedestrian bridge with excellent river and skyline views."
+    },
+    {
+      "id": "loc-british-museum",
+      "name": "British Museum",
+      "type": "museum",
+      "lat": 51.5194,
+      "lng": -0.127,
+      "dayIds": [
+        "day-02"
+      ],
+      "tubeStations": [
+        "Tottenham Court Road",
+        "Holborn",
+        "Russell Square"
+      ],
+      "description": "World-class museum of British and global history."
+    },
+    {
+      "id": "loc-bloomsbury",
+      "name": "Bloomsbury",
+      "type": "neighborhood",
+      "lat": 51.522,
+      "lng": -0.125,
+      "dayIds": [
+        "day-02"
+      ],
+      "tubeStations": [
+        "Russell Square",
+        "Holborn"
+      ],
+      "description": "Historic neighborhood with Georgian squares, bookish character, and museum access."
+    },
+    {
+      "id": "loc-charles-dickens-museum",
+      "name": "Charles Dickens Museum",
+      "type": "museum",
+      "lat": 51.5232,
+      "lng": -0.1167,
+      "dayIds": [
+        "day-02"
+      ],
+      "tubeStations": [
+        "Russell Square",
+        "Chancery Lane"
+      ],
+      "description": "Dickens’s former home and one of London’s best literary museums."
+    },
+    {
+      "id": "loc-british-library",
+      "name": "British Library",
+      "type": "library",
+      "lat": 51.5299,
+      "lng": -0.127,
+      "dayIds": [
+        "day-02"
+      ],
+      "tubeStations": [
+        "King’s Cross St Pancras",
+        "Euston"
+      ],
+      "description": "Major cultural institution with manuscripts, literary treasures, and archives."
+    },
+    {
+      "id": "loc-churchill-war-rooms",
+      "name": "Churchill War Rooms",
+      "type": "museum",
+      "lat": 51.5022,
+      "lng": -0.1291,
+      "dayIds": [
+        "day-03"
+      ],
+      "tubeStations": [
+        "Westminster",
+        "St James’s Park"
+      ],
+      "description": "Preserved underground WWII command center and museum."
+    },
+    {
+      "id": "loc-houses-of-parliament",
+      "name": "Houses of Parliament",
+      "type": "historic-site",
+      "lat": 51.4995,
+      "lng": -0.1248,
+      "dayIds": [
+        "day-03"
+      ],
+      "tubeStations": [
+        "Westminster"
+      ],
+      "description": "Seat of the UK Parliament and anchor of Westminster."
+    },
+    {
+      "id": "loc-big-ben",
+      "name": "Big Ben",
+      "type": "landmark",
+      "lat": 51.5007,
+      "lng": -0.1246,
+      "dayIds": [
+        "day-03"
+      ],
+      "tubeStations": [
+        "Westminster"
+      ],
+      "description": "London’s iconic clock tower at the Palace of Westminster."
+    },
+    {
+      "id": "loc-westminster-abbey",
+      "name": "Westminster Abbey",
+      "type": "church",
+      "lat": 51.4994,
+      "lng": -0.1273,
+      "dayIds": [
+        "day-03"
+      ],
+      "tubeStations": [
+        "Westminster",
+        "St James’s Park"
+      ],
+      "description": "Historic royal church and one of London’s essential national monuments."
+    },
+    {
+      "id": "loc-poets-corner",
+      "name": "Poets’ Corner",
+      "type": "literary-site",
+      "lat": 51.4994,
+      "lng": -0.1273,
+      "dayIds": [
+        "day-03"
+      ],
+      "tubeStations": [
+        "Westminster",
+        "St James’s Park"
+      ],
+      "description": "Literary memorial area inside Westminster Abbey."
+    },
+    {
+      "id": "loc-thames-river-cruise-westminster",
+      "name": "Thames River Cruise (Westminster departure area)",
+      "type": "activity",
+      "lat": 51.5009,
+      "lng": -0.1247,
+      "dayIds": [
+        "day-03"
+      ],
+      "tubeStations": [
+        "Westminster"
+      ],
+      "description": "Optional river cruise departure area near Westminster Pier."
+    },
+    {
+      "id": "loc-tower-of-london",
+      "name": "Tower of London",
+      "type": "historic-site",
+      "lat": 51.5081,
+      "lng": -0.0759,
+      "dayIds": [
+        "day-04"
+      ],
+      "tubeStations": [
+        "Tower Hill"
+      ],
+      "description": "Medieval fortress, royal palace, and major historical site."
+    },
+    {
+      "id": "loc-borough-market",
+      "name": "Borough Market",
+      "type": "market",
+      "lat": 51.5055,
+      "lng": -0.091,
+      "dayIds": [
+        "day-04",
+        "day-09"
+      ],
+      "tubeStations": [
+        "London Bridge"
+      ],
+      "description": "Premier London food market and strong lunch stop."
+    },
+    {
+      "id": "loc-south-bank",
+      "name": "South Bank",
+      "type": "riverwalk",
+      "lat": 51.506,
+      "lng": -0.115,
+      "dayIds": [
+        "day-04"
+      ],
+      "tubeStations": [
+        "Waterloo",
+        "Blackfriars"
+      ],
+      "description": "Popular riverside walking corridor with cultural sights and city views."
+    },
+    {
+      "id": "loc-millennium-bridge",
+      "name": "Millennium Bridge",
+      "type": "bridge",
+      "lat": 51.5094,
+      "lng": -0.0983,
+      "dayIds": [
+        "day-04"
+      ],
+      "tubeStations": [
+        "St Paul’s",
+        "Blackfriars"
+      ],
+      "description": "Pedestrian bridge linking South Bank to St Paul’s."
+    },
+    {
+      "id": "loc-st-pauls-cathedral",
+      "name": "St Paul’s Cathedral",
+      "type": "church",
+      "lat": 51.5138,
+      "lng": -0.0984,
+      "dayIds": [
+        "day-04"
+      ],
+      "tubeStations": [
+        "St Paul’s",
+        "Blackfriars"
+      ],
+      "description": "Major London cathedral with long national significance."
+    },
+    {
+      "id": "loc-tate-britain",
+      "name": "Tate Britain",
+      "type": "museum",
+      "lat": 51.4916,
+      "lng": -0.127,
+      "dayIds": [
+        "day-05"
+      ],
+      "tubeStations": [
+        "Pimlico"
+      ],
+      "description": "Best single museum for British art."
+    },
+    {
+      "id": "loc-pimlico",
+      "name": "Pimlico",
+      "type": "neighborhood",
+      "lat": 51.4893,
+      "lng": -0.1331,
+      "dayIds": [
+        "day-05"
+      ],
+      "tubeStations": [
+        "Pimlico"
+      ],
+      "description": "Residential area near Tate Britain with cafés and restaurants."
+    },
+    {
+      "id": "loc-kings-road",
+      "name": "King’s Road, Chelsea",
+      "type": "street",
+      "lat": 51.4876,
+      "lng": -0.1687,
+      "dayIds": [
+        "day-05"
+      ],
+      "tubeStations": [
+        "Sloane Square"
+      ],
+      "description": "Chelsea’s main stylish street with shops, cafés, and restaurants."
+    },
+    {
+      "id": "loc-saatchi-gallery",
+      "name": "Saatchi Gallery",
+      "type": "gallery",
+      "lat": 51.4921,
+      "lng": -0.1586,
+      "dayIds": [
+        "day-05"
+      ],
+      "tubeStations": [
+        "Sloane Square"
+      ],
+      "description": "Contemporary art gallery in Chelsea; optional add-on."
+    },
+    {
+      "id": "loc-abbey-road",
+      "name": "Abbey Road",
+      "type": "music-site",
+      "lat": 51.5321,
+      "lng": -0.1771,
+      "dayIds": [
+        "day-06"
+      ],
+      "tubeStations": [
+        "St John’s Wood"
+      ],
+      "description": "Iconic Beatles crossing and recording landmark."
+    },
+    {
+      "id": "loc-soho-music-landmarks",
+      "name": "Soho Music Landmarks",
+      "type": "music-area",
+      "lat": 51.5136,
+      "lng": -0.1365,
+      "dayIds": [
+        "day-06"
+      ],
+      "tubeStations": [
+        "Oxford Circus",
+        "Tottenham Court Road",
+        "Piccadilly Circus"
+      ],
+      "description": "Cluster of clubs and sites tied to British rock and pop history."
+    },
+    {
+      "id": "loc-chelsea-rolling-stones-history",
+      "name": "Chelsea / Rolling Stones History Area",
+      "type": "music-area",
+      "lat": 51.4878,
+      "lng": -0.168,
+      "dayIds": [
+        "day-06"
+      ],
+      "tubeStations": [
+        "Sloane Square"
+      ],
+      "description": "Chelsea area associated with 1960s music and Rolling Stones history."
+    },
+    {
+      "id": "loc-queen-hendrix-sites",
+      "name": "Queen & Hendrix Sites",
+      "type": "music-area",
+      "lat": 51.511,
+      "lng": -0.147,
+      "dayIds": [
+        "day-06"
+      ],
+      "tubeStations": [
+        "Bond Street",
+        "Green Park",
+        "Oxford Circus"
+      ],
+      "description": "General cluster of central London sites tied to Queen and Jimi Hendrix."
+    },
+    {
+      "id": "loc-handel-and-hendrix-house",
+      "name": "Handel & Hendrix House",
+      "type": "museum",
+      "lat": 51.5121,
+      "lng": -0.1464,
+      "dayIds": [
+        "day-06"
+      ],
+      "tubeStations": [
+        "Bond Street",
+        "Oxford Circus"
+      ],
+      "description": "Compact museum linking Handel and Hendrix in one house museum setting."
+    },
+    {
+      "id": "loc-denmark-street",
+      "name": "Denmark Street",
+      "type": "music-site",
+      "lat": 51.5155,
+      "lng": -0.1291,
+      "dayIds": [
+        "day-06"
+      ],
+      "tubeStations": [
+        "Tottenham Court Road"
+      ],
+      "description": "Historic music street associated with instruments, songwriting, and studios."
+    },
+    {
+      "id": "loc-ronnie-scoutts",
+      "name": "Ronnie Scott’s",
+      "type": "music-venue",
+      "lat": 51.5133,
+      "lng": -0.1327,
+      "dayIds": [
+        "day-06"
+      ],
+      "tubeStations": [
+        "Tottenham Court Road",
+        "Leicester Square",
+        "Piccadilly Circus"
+      ],
+      "description": "Legendary Soho jazz club and evening music option."
+    },
+    {
+      "id": "loc-the-100-club",
+      "name": "The 100 Club",
+      "type": "music-venue",
+      "lat": 51.5153,
+      "lng": -0.1418,
+      "dayIds": [
+        "day-06"
+      ],
+      "tubeStations": [
+        "Oxford Circus",
+        "Tottenham Court Road"
+      ],
+      "description": "Historic live music venue with deep rock and punk associations."
+    },
+    {
+      "id": "loc-jazz-cafe",
+      "name": "Jazz Café",
+      "type": "music-venue",
+      "lat": 51.5413,
+      "lng": -0.142,
+      "dayIds": [
+        "day-06"
+      ],
+      "tubeStations": [
+        "Camden Town"
+      ],
+      "description": "Camden live music venue; optional evening alternative."
+    },
+    {
+      "id": "loc-v-and-a-museum",
+      "name": "Victoria & Albert Museum",
+      "type": "museum",
+      "lat": 51.4966,
+      "lng": -0.1722,
+      "dayIds": [
+        "day-07"
+      ],
+      "tubeStations": [
+        "South Kensington"
+      ],
+      "description": "Major museum of design, decorative arts, and fashion."
+    },
+    {
+      "id": "loc-natural-history-museum",
+      "name": "Natural History Museum",
+      "type": "museum",
+      "lat": 51.4967,
+      "lng": -0.1764,
+      "dayIds": [
+        "day-07"
+      ],
+      "tubeStations": [
+        "South Kensington"
+      ],
+      "description": "Classic museum experience in a dramatic historic building."
+    },
+    {
+      "id": "loc-science-museum",
+      "name": "Science Museum",
+      "type": "museum",
+      "lat": 51.4978,
+      "lng": -0.1745,
+      "dayIds": [
+        "day-07"
+      ],
+      "tubeStations": [
+        "South Kensington"
+      ],
+      "description": "Science and technology museum; optional South Kensington choice."
+    },
+    {
+      "id": "loc-hyde-park",
+      "name": "Hyde Park",
+      "type": "park",
+      "lat": 51.5073,
+      "lng": -0.1657,
+      "dayIds": [
+        "day-07"
+      ],
+      "tubeStations": [
+        "Hyde Park Corner",
+        "Lancaster Gate",
+        "South Kensington"
+      ],
+      "description": "Major central green space and a good reset between museums."
+    },
+    {
+      "id": "loc-kensington-gardens",
+      "name": "Kensington Gardens",
+      "type": "park",
+      "lat": 51.505,
+      "lng": -0.1795,
+      "dayIds": [
+        "day-07"
+      ],
+      "tubeStations": [
+        "Queensway",
+        "Lancaster Gate",
+        "South Kensington"
+      ],
+      "description": "Parkland adjoining Hyde Park with a calmer, more garden-like feel."
+    },
+    {
+      "id": "loc-bletchley-park",
+      "name": "Bletchley Park",
+      "type": "day-trip",
+      "lat": 51.9976,
+      "lng": -0.7405,
+      "dayIds": [
+        "day-08"
+      ],
+      "tubeStations": [
+        "Train from Euston to Bletchley"
+      ],
+      "description": "WWII codebreaking headquarters and strongest day-trip match for your interests."
+    },
+    {
+      "id": "loc-oxford",
+      "name": "Oxford",
+      "type": "day-trip",
+      "lat": 51.752,
+      "lng": -1.2577,
+      "dayIds": [
+        "day-08"
+      ],
+      "tubeStations": [
+        "National Rail / coach from London"
+      ],
+      "description": "Historic university city and alternate day-trip option."
+    },
+    {
+      "id": "loc-windsor",
+      "name": "Windsor",
+      "type": "day-trip",
+      "lat": 51.4839,
+      "lng": -0.6044,
+      "dayIds": [
+        "day-08"
+      ],
+      "tubeStations": [
+        "National Rail from London"
+      ],
+      "description": "Royal town and castle destination west of London."
+    },
+    {
+      "id": "loc-brighton",
+      "name": "Brighton",
+      "type": "day-trip",
+      "lat": 50.8225,
+      "lng": -0.1372,
+      "dayIds": [
+        "day-08"
+      ],
+      "tubeStations": [
+        "National Rail from London"
+      ],
+      "description": "Seaside day trip with food, music culture, and a different pace."
+    },
+    {
+      "id": "loc-cambridge",
+      "name": "Cambridge",
+      "type": "day-trip",
+      "lat": 52.2053,
+      "lng": 0.1218,
+      "dayIds": [
+        "day-08"
+      ],
+      "tubeStations": [
+        "National Rail from London"
+      ],
+      "description": "Historic university city and day-trip alternative."
+    },
+    {
+      "id": "loc-maltby-street-market",
+      "name": "Maltby Street Market",
+      "type": "market",
+      "lat": 51.4999,
+      "lng": -0.0707,
+      "dayIds": [
+        "day-09"
+      ],
+      "tubeStations": [
+        "London Bridge",
+        "Bermondsey"
+      ],
+      "description": "Weekend food market and alternative to Borough Market."
+    },
+    {
+      "id": "loc-shoreditch",
+      "name": "Shoreditch",
+      "type": "neighborhood",
+      "lat": 51.5246,
+      "lng": -0.0786,
+      "dayIds": [
+        "day-09"
+      ],
+      "tubeStations": [
+        "Liverpool Street",
+        "Shoreditch High Street"
+      ],
+      "description": "Creative East London neighborhood with food, shops, and street art."
+    },
+    {
+      "id": "loc-brick-lane",
+      "name": "Brick Lane",
+      "type": "street",
+      "lat": 51.5219,
+      "lng": -0.0716,
+      "dayIds": [
+        "day-09"
+      ],
+      "tubeStations": [
+        "Liverpool Street",
+        "Aldgate East"
+      ],
+      "description": "East London street known for food, markets, and street culture."
+    },
+    {
+      "id": "loc-spitalfields-market",
+      "name": "Spitalfields Market",
+      "type": "market",
+      "lat": 51.5195,
+      "lng": -0.0756,
+      "dayIds": [
+        "day-09"
+      ],
+      "tubeStations": [
+        "Liverpool Street",
+        "Aldgate East"
+      ],
+      "description": "Covered market and shopping area near Shoreditch."
+    },
+    {
+      "id": "loc-tate-modern",
+      "name": "Tate Modern",
+      "type": "museum",
+      "lat": 51.5076,
+      "lng": -0.0994,
+      "dayIds": [
+        "day-09"
+      ],
+      "tubeStations": [
+        "Blackfriars",
+        "Southwark",
+        "St Paul’s"
+      ],
+      "description": "Major modern and contemporary art museum; optional add-on."
+    },
+    {
+      "id": "loc-national-gallery",
+      "name": "National Gallery",
+      "type": "museum",
+      "lat": 51.5089,
+      "lng": -0.1283,
+      "dayIds": [
+        "day-09"
+      ],
+      "tubeStations": [
+        "Charing Cross",
+        "Leicester Square"
+      ],
+      "description": "World-class painting collection on Trafalgar Square; optional add-on."
+    },
+    {
+      "id": "loc-regents-park",
+      "name": "Regent’s Park",
+      "type": "park",
+      "lat": 51.5313,
+      "lng": -0.1569,
+      "dayIds": [
+        "day-10"
+      ],
+      "tubeStations": [
+        "Regent’s Park",
+        "Baker Street",
+        "Great Portland Street"
+      ],
+      "description": "Classic central London park and good final-morning walk."
+    },
+    {
+      "id": "loc-primrose-hill",
+      "name": "Primrose Hill",
+      "type": "neighborhood",
+      "lat": 51.5392,
+      "lng": -0.1511,
+      "dayIds": [
+        "day-10"
+      ],
+      "tubeStations": [
+        "Chalk Farm"
+      ],
+      "description": "Attractive neighborhood and hilltop park area for a final brunch morning."
+    }
+  ]
+}

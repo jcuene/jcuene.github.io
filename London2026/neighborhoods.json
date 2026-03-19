@@ -1,0 +1,216 @@
+{
+  "collection": {
+    "id": "lental-neighborhoods-001",
+    "title": "London Neighborhoods for Short-Term Rentals",
+    "city": "London",
+    "country": "England",
+    "selectionCriteria": [
+      "Upscale or somewhat affluent",
+      "Walkable with coffee shops, takeout, restaurants, and groceries",
+      "Easy Tube access",
+      "Centrally located for reaching most of London"
+    ]
+  },
+  "neighborhoods": [
+    {
+      "id": "neigh-marylebone",
+      "name": "Marylebone",
+      "summary": "One of London’s most desirable residential neighborhoods, with a refined village feel, strong food scene, and excellent central access.",
+      "vibe": "Upscale, calm, stylish, affluent without feeling flashy",
+      "whyStayHere": [
+        "Beautiful Georgian and Victorian apartments",
+        "Excellent cafés, bakeries, and restaurants",
+        "Walkable to parts of the West End and Regent’s Park",
+        "Quiet evenings and very livable for a longer stay"
+      ],
+      "airbnbSearchStreets": [
+        "Marylebone High Street",
+        "Paddington Street",
+        "Devonshire Street",
+        "Chiltern Street",
+        "New Cavendish Street",
+        "Upper Wimpole Street"
+      ],
+      "tubeStations": [
+        "Baker Street",
+        "Bond Street",
+        "Regent’s Park"
+      ],
+      "center": {
+        "lat": 51.5205,
+        "lng": -0.1527
+      },
+      "notes": [
+        "Best overall balance of upscale feel, walkability, food, and centrality.",
+        "Look on side streets rather than main roads for quieter nights."
+      ],
+      "fitScore": {
+        "walkability": 5,
+        "tubeAccess": 5,
+        "upscaleFeel": 5,
+        "centrality": 5
+      }
+    },
+    {
+      "id": "neigh-bloomsbury",
+      "name": "Bloomsbury",
+      "summary": "Classic, intellectual London with Georgian squares, historic architecture, and easy access to museums and the West End.",
+      "vibe": "Historic, bookish, quietly central, elegant but understated",
+      "whyStayHere": [
+        "Beautiful garden squares and Georgian townhouses",
+        "Walkable to the British Museum, Soho, and Covent Garden",
+        "Strong café culture and practical grocery options",
+        "Feels central without the intensity of more tourist-heavy districts"
+      ],
+      "airbnbSearchStreets": [
+        "Bedford Square",
+        "Tavistock Place",
+        "Marchmont Street",
+        "Great Russell Street",
+        "Store Street",
+        "Guilford Street"
+      ],
+      "tubeStations": [
+        "Russell Square",
+        "Holborn",
+        "Tottenham Court Road"
+      ],
+      "center": {
+        "lat": 51.5222,
+        "lng": -0.1252
+      },
+      "notes": [
+        "Strong choice if museums and classic London atmosphere are central to the trip.",
+        "Squares and streets north of the British Museum are especially appealing."
+      ],
+      "fitScore": {
+        "walkability": 5,
+        "tubeAccess": 5,
+        "upscaleFeel": 4,
+        "centrality": 5
+      }
+    },
+    {
+      "id": "neigh-south-kensington",
+      "name": "South Kensington",
+      "summary": "A polished and comfortable neighborhood known for grand architecture, major museums, and reliable transit connections.",
+      "vibe": "Polished, upscale, museum-adjacent, internationally minded",
+      "whyStayHere": [
+        "Elegant Victorian and Edwardian apartment buildings",
+        "Excellent access to the V&A, Natural History Museum, and Science Museum",
+        "Good cafés, bakeries, and neighborhood restaurants",
+        "Easy reach to Hyde Park and Kensington Gardens"
+      ],
+      "airbnbSearchStreets": [
+        "Thurloe Square",
+        "Queen’s Gate",
+        "Cromwell Road",
+        "Pelham Street",
+        "Onslow Square",
+        "Harrington Road"
+      ],
+      "tubeStations": [
+        "South Kensington",
+        "Gloucester Road"
+      ],
+      "center": {
+        "lat": 51.4949,
+        "lng": -0.1749
+      },
+      "notes": [
+        "The easiest comfort-first choice for many travelers.",
+        "Avoid apartments directly on Cromwell Road unless soundproofing is excellent."
+      ],
+      "fitScore": {
+        "walkability": 4,
+        "tubeAccess": 5,
+        "upscaleFeel": 5,
+        "centrality": 4
+      }
+    },
+    {
+      "id": "neigh-covent-garden",
+      "name": "Covent Garden",
+      "summary": "One of the most central and lively areas in London, ideal for travelers who want to be in the middle of dining, theater, and walkable sightseeing.",
+      "vibe": "Lively, central, theatrical, energetic, highly convenient",
+      "whyStayHere": [
+        "Extremely central and easy to walk almost everywhere",
+        "Outstanding restaurant and café density",
+        "Strong historic character and street life",
+        "Excellent fit for a first trip focused on central London"
+      ],
+      "airbnbSearchStreets": [
+        "Floral Street",
+        "Shelton Street",
+        "Tavistock Street",
+        "Neal Street",
+        "Henrietta Street",
+        "Maiden Lane"
+      ],
+      "tubeStations": [
+        "Covent Garden",
+        "Leicester Square",
+        "Tottenham Court Road"
+      ],
+      "center": {
+        "lat": 51.5117,
+        "lng": -0.124
+      },
+      "notes": [
+        "Best for travelers who want maximum centrality and energy.",
+        "Seven Dials and side streets are quieter than the main piazza area."
+      ],
+      "fitScore": {
+        "walkability": 5,
+        "tubeAccess": 4,
+        "upscaleFeel": 4,
+        "centrality": 5
+      }
+    },
+    {
+      "id": "neigh-chelsea",
+      "name": "Chelsea",
+      "summary": "A refined residential neighborhood with beautiful streets, affluence, and a quieter feel than the West End.",
+      "vibe": "Elegant, residential, affluent, stylish, slower-paced",
+      "whyStayHere": [
+        "Beautiful streets and well-kept apartments",
+        "Excellent local cafés, restaurants, and boutiques",
+        "Feels more like living in London than visiting tourist center",
+        "Good fit for longer stays and relaxed evenings"
+      ],
+      "airbnbSearchStreets": [
+        "Cheyne Walk",
+        "Sydney Street",
+        "Flood Street",
+        "Elm Park Road",
+        "Markham Street",
+        "Bywater Street"
+      ],
+      "tubeStations": [
+        "Sloane Square",
+        "South Kensington"
+      ],
+      "center": {
+        "lat": 51.4875,
+        "lng": -0.1683
+      },
+      "notes": [
+        "Best for a residential, elegant London experience.",
+        "Apartments just off King’s Road often balance access and quiet well."
+      ],
+      "fitScore": {
+        "walkability": 4,
+        "tubeAccess": 4,
+        "upscaleFeel": 5,
+        "centrality": 4
+      }
+    }
+  ],
+  "recommendationOrder": [
+    "neigh-marylebone",
+    "neigh-bloomsbury",
+    "neigh-south-kensington",
+    "neigh-covent-garden",
+    "neigh-chelsea"
+  ]
+}
