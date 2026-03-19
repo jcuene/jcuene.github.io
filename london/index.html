@@ -183,7 +183,27 @@
     }
     .items li.opt { color: #aaa; font-style: italic; }
 
-    /* ── Dining ── */
+    /* ── Map links ── */
+    .items li a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1.5px solid rgba(200, 16, 46, 0.3);
+      transition: color 0.1s, border-color 0.1s;
+    }
+    .items li a:hover, .items li a:active {
+      color: var(--red);
+      border-bottom-color: var(--red);
+    }
+    .items li a::after {
+      content: ' ↗';
+      font-size: 0.68rem;
+      color: var(--red);
+      opacity: 0.6;
+      font-style: normal;
+    }
+    .items li.opt a { color: #aaa; }
+
+    /* ── Dining chips ── */
     .chips { display: flex; flex-wrap: wrap; gap: 7px; }
     .chip {
       background: #fff0f1;
@@ -194,6 +214,12 @@
       font-size: 0.85rem;
       font-weight: 500;
     }
+    a.chip {
+      text-decoration: none;
+      transition: background 0.15s;
+      display: inline-block;
+    }
+    a.chip:hover { background: #ffc5c8; }
 
     /* ── Notes ── */
     .notes-list { list-style: none; }
@@ -269,15 +295,19 @@ const DAYS = [
     sections: [
       { time: 'Afternoon', icon: '☀️', items: [
         'Arrive in London and check in',
-        'Walk through Covent Garden',
-        'Leicester Square',
-        'Trafalgar Square'
+        {text: 'Walk through Covent Garden', url: 'https://maps.google.com/?q=Covent+Garden,+London'},
+        {text: 'Leicester Square', url: 'https://maps.google.com/?q=Leicester+Square,+London'},
+        {text: 'Trafalgar Square', url: 'https://maps.google.com/?q=Trafalgar+Square,+London'}
       ]},
       { time: 'Evening', icon: '🌆', items: [
-        { text: 'Optional: sunset walk over the Golden Jubilee Bridge', opt: true }
+        {text: 'Optional: sunset walk over the Golden Jubilee Bridge', opt: true, url: 'https://maps.google.com/?q=Golden+Jubilee+Bridges,+London'}
       ]}
     ],
-    dining: ['Dishoom', 'Hawksmoor Seven Dials', 'The Barbary'],
+    dining: [
+      {name: 'Dishoom', url: 'https://maps.google.com/?q=Dishoom+Covent+Garden,+London'},
+      {name: 'Hawksmoor Seven Dials', url: 'https://maps.google.com/?q=Hawksmoor+Seven+Dials,+London'},
+      {name: 'The Barbary', url: 'https://maps.google.com/?q=The+Barbary,+London'}
+    ],
     notes: [
       'Keep this day flexible — adjust to arrival energy.',
       'Good first-day orientation on foot.'
@@ -289,17 +319,21 @@ const DAYS = [
     summary: 'World-class museum morning followed by a bookish Bloomsbury afternoon.',
     sections: [
       { time: 'Morning', icon: '🌅', items: [
-        'British Museum',
+        {text: 'British Museum', url: 'https://maps.google.com/?q=British+Museum,+London'},
         'Focus: Sutton Hoo, Rosetta Stone, British archaeology collections'
       ]},
       { time: 'Afternoon', icon: '☀️', items: [
-        'Lunch in Bloomsbury',
-        'Walk the Bloomsbury squares',
-        { text: 'Optional: Charles Dickens Museum', opt: true },
-        { text: 'Optional: British Library Treasures Gallery', opt: true }
+        {text: 'Lunch in Bloomsbury', url: 'https://maps.google.com/?q=Bloomsbury,+London'},
+        {text: 'Walk the Bloomsbury squares', url: 'https://maps.google.com/?q=Bloomsbury+Square,+London'},
+        {text: 'Optional: Charles Dickens Museum', opt: true, url: 'https://maps.google.com/?q=Charles+Dickens+Museum,+London'},
+        {text: 'Optional: British Library Treasures Gallery', opt: true, url: 'https://maps.google.com/?q=British+Library,+London'}
       ]}
     ],
-    dining: ['NOPI', 'St. John', 'Cinnamon Bazaar'],
+    dining: [
+      {name: 'NOPI', url: 'https://maps.google.com/?q=NOPI+Restaurant,+London'},
+      {name: 'St. John', url: 'https://maps.google.com/?q=St+John+Restaurant+Smithfield,+London'},
+      {name: 'Cinnamon Bazaar', url: 'https://maps.google.com/?q=Cinnamon+Bazaar,+London'}
+    ],
     notes: [
       'Allow 2–3 hours for the British Museum.',
       'Optional literary stops if mood allows.'
@@ -311,17 +345,20 @@ const DAYS = [
     summary: 'Churchill, Parliament, Westminster Abbey, and core national history.',
     sections: [
       { time: 'Morning', icon: '🌅', items: [
-        'Churchill War Rooms — book in advance'
+        {text: 'Churchill War Rooms — book in advance', url: 'https://maps.google.com/?q=Churchill+War+Rooms,+London'}
       ]},
       { time: 'Afternoon', icon: '☀️', items: [
-        'Houses of Parliament',
-        'Big Ben',
-        'Westminster Abbey',
-        { text: "Optional: Poets' Corner (inside the Abbey)", opt: true },
-        { text: 'Optional: Thames river cruise', opt: true }
+        {text: 'Houses of Parliament', url: 'https://maps.google.com/?q=Houses+of+Parliament,+London'},
+        {text: 'Big Ben', url: 'https://maps.google.com/?q=Big+Ben,+London'},
+        {text: 'Westminster Abbey', url: 'https://maps.google.com/?q=Westminster+Abbey,+London'},
+        {text: "Optional: Poets' Corner (inside the Abbey)", opt: true},
+        {text: 'Optional: Thames river cruise from Westminster Pier', opt: true, url: 'https://maps.google.com/?q=Westminster+Pier,+London'}
       ]}
     ],
-    dining: ['The Harwood Arms', 'The Palomar'],
+    dining: [
+      {name: 'The Harwood Arms', url: 'https://maps.google.com/?q=Harwood+Arms,+London'},
+      {name: 'The Palomar', url: 'https://maps.google.com/?q=The+Palomar,+London'}
+    ],
     notes: [
       'Book Churchill War Rooms in advance — it sells out.',
       'River cruise is a relaxing optional extra.'
@@ -333,16 +370,20 @@ const DAYS = [
     summary: 'Major history in the morning, food and river walking in the afternoon.',
     sections: [
       { time: 'Morning', icon: '🌅', items: [
-        'Tower of London — allow at least 2 hours'
+        {text: 'Tower of London — allow at least 2 hours', url: 'https://maps.google.com/?q=Tower+of+London'}
       ]},
       { time: 'Afternoon', icon: '☀️', items: [
-        'Lunch at Borough Market',
-        'Walk along the South Bank',
-        'Cross the Millennium Bridge',
-        "Visit or view St Paul's Cathedral"
+        {text: 'Lunch at Borough Market', url: 'https://maps.google.com/?q=Borough+Market,+London'},
+        {text: 'Walk along the South Bank', url: 'https://maps.google.com/?q=South+Bank,+London'},
+        {text: 'Cross the Millennium Bridge', url: 'https://maps.google.com/?q=Millennium+Bridge,+London'},
+        {text: "Visit or view St Paul's Cathedral", url: 'https://maps.google.com/?q=St+Pauls+Cathedral,+London'}
       ]}
     ],
-    dining: ['Padella', 'El Pastor', 'Wright Bros'],
+    dining: [
+      {name: 'Padella', url: 'https://maps.google.com/?q=Padella,+London'},
+      {name: 'El Pastor', url: 'https://maps.google.com/?q=El+Pastor,+London'},
+      {name: 'Wright Bros', url: 'https://maps.google.com/?q=Wright+Brothers+Oyster+Bar,+London'}
+    ],
     notes: [
       'Tower of London is a major site — allow at least 2 hours.',
       'Borough Market is an excellent lunch stop.'
@@ -354,16 +395,20 @@ const DAYS = [
     summary: 'British art in the morning followed by a slower neighborhood afternoon.',
     sections: [
       { time: 'Morning', icon: '🌅', items: [
-        'Tate Britain',
+        {text: 'Tate Britain', url: 'https://maps.google.com/?q=Tate+Britain,+London'},
         'Focus: Turner, Blake, Pre-Raphaelites'
       ]},
       { time: 'Afternoon', icon: '☀️', items: [
-        'Lunch in Pimlico or Chelsea',
-        "Walk King's Road, Chelsea",
-        { text: 'Optional: Saatchi Gallery (free)', opt: true }
+        {text: 'Lunch in Pimlico or Chelsea', url: 'https://maps.google.com/?q=Pimlico,+London'},
+        {text: "Walk King's Road, Chelsea", url: 'https://maps.google.com/?q=Kings+Road,+Chelsea,+London'},
+        {text: 'Optional: Saatchi Gallery (free)', opt: true, url: 'https://maps.google.com/?q=Saatchi+Gallery,+London'}
       ]}
     ],
-    dining: ['Rabbit', 'The Orange', 'The Five Fields'],
+    dining: [
+      {name: 'Rabbit', url: 'https://maps.google.com/?q=Rabbit+Restaurant+Chelsea,+London'},
+      {name: 'The Orange', url: 'https://maps.google.com/?q=The+Orange+Pimlico,+London'},
+      {name: 'The Five Fields', url: 'https://maps.google.com/?q=The+Five+Fields+Restaurant,+London'}
+    ],
     notes: [
       'Tate Britain focus: Turner, Blake, Pre-Raphaelites.',
       'Saatchi Gallery is free and an easy add-on.'
@@ -375,23 +420,27 @@ const DAYS = [
     summary: 'A flexible guided or self-guided music-history day across London.',
     sections: [
       { time: 'Option A — Guided Tour', icon: '🗺️', items: [
-        'Abbey Road',
-        'Soho music landmarks',
-        'Chelsea / Rolling Stones history',
-        'Queen and Hendrix sites'
+        {text: 'Abbey Road', url: 'https://maps.google.com/?q=Abbey+Road,+London'},
+        {text: 'Soho music landmarks', url: 'https://maps.google.com/?q=Soho,+London'},
+        {text: 'Chelsea / Rolling Stones history', url: 'https://maps.google.com/?q=Chelsea,+London'},
+        {text: 'Queen and Hendrix sites', url: 'https://maps.google.com/?q=Mayfair,+London'}
       ]},
       { time: 'Option B — Self-Guided', icon: '👟', items: [
-        'Abbey Road Studios (exterior / crosswalk)',
-        'Handel & Hendrix House',
-        'Denmark Street'
+        {text: 'Abbey Road Studios (exterior / crosswalk)', url: 'https://maps.google.com/?q=Abbey+Road+Studios,+London'},
+        {text: 'Handel & Hendrix House', url: 'https://maps.google.com/?q=Handel+Hendrix+House,+London'},
+        {text: 'Denmark Street', url: 'https://maps.google.com/?q=Denmark+Street,+London'}
       ]},
       { time: 'Evening — Live Music', icon: '🎵', items: [
-        "Ronnie Scott's",
-        'The 100 Club',
-        'Jazz Café'
+        {text: "Ronnie Scott's", url: 'https://maps.google.com/?q=Ronnie+Scotts+Jazz+Club,+London'},
+        {text: 'The 100 Club', url: 'https://maps.google.com/?q=The+100+Club,+London'},
+        {text: 'Jazz Café', url: 'https://maps.google.com/?q=Jazz+Cafe,+Camden,+London'}
       ]}
     ],
-    dining: ['Barrafina', 'Blacklock Soho', 'The Clove Club'],
+    dining: [
+      {name: 'Barrafina', url: 'https://maps.google.com/?q=Barrafina,+London'},
+      {name: 'Blacklock Soho', url: 'https://maps.google.com/?q=Blacklock+Soho,+London'},
+      {name: 'The Clove Club', url: 'https://maps.google.com/?q=The+Clove+Club,+London'}
+    ],
     notes: [
       'Choose one live music venue for the evening.',
       'Abbey Road crosswalk is free and iconic.'
@@ -403,16 +452,20 @@ const DAYS = [
     summary: 'Choose one or two world-class museums, then unwind in the parks.',
     sections: [
       { time: 'Choose 1–2 Museums', icon: '🏛️', items: [
-        'Victoria & Albert Museum',
-        'Natural History Museum',
-        'Science Museum'
+        {text: 'Victoria & Albert Museum', url: 'https://maps.google.com/?q=Victoria+and+Albert+Museum,+London'},
+        {text: 'Natural History Museum', url: 'https://maps.google.com/?q=Natural+History+Museum,+London'},
+        {text: 'Science Museum', url: 'https://maps.google.com/?q=Science+Museum,+London'}
       ]},
       { time: 'Afternoon', icon: '🌳', items: [
-        'Walk through Hyde Park',
-        'Kensington Gardens'
+        {text: 'Walk through Hyde Park', url: 'https://maps.google.com/?q=Hyde+Park,+London'},
+        {text: 'Kensington Gardens', url: 'https://maps.google.com/?q=Kensington+Gardens,+London'}
       ]}
     ],
-    dining: ['Ottolenghi', 'Maggie Jones', 'Hereford Road'],
+    dining: [
+      {name: 'Ottolenghi', url: 'https://maps.google.com/?q=Ottolenghi+Notting+Hill,+London'},
+      {name: 'Maggie Jones', url: 'https://maps.google.com/?q=Maggie+Jones+Restaurant,+London'},
+      {name: 'Hereford Road', url: 'https://maps.google.com/?q=Hereford+Road+Restaurant,+London'}
+    ],
     notes: [
       'Choose 1–2 museums — do not overload the day.',
       'Good recovery day after a denser stretch of sightseeing.'
@@ -424,14 +477,14 @@ const DAYS = [
     summary: 'Best fit: Bletchley Park (WWII codebreaking). Several other options available.',
     sections: [
       { time: 'Top Pick', icon: '⭐', items: [
-        'Bletchley Park — WWII codebreaking HQ',
-        'Train from London Euston to Bletchley (~50 min)'
+        {text: 'Bletchley Park — WWII codebreaking HQ', url: 'https://maps.google.com/?q=Bletchley+Park,+Milton+Keynes'},
+        {text: 'Train from London Euston (~50 min)', url: 'https://maps.google.com/?q=London+Euston+Station'}
       ]},
       { time: 'Alternatives', icon: '🗺️', items: [
-        { text: 'Oxford — historic university city', opt: true },
-        { text: 'Windsor — royal castle and town', opt: true },
-        { text: 'Brighton — seaside food and culture', opt: true },
-        { text: 'Cambridge — historic university city', opt: true }
+        {text: 'Oxford — historic university city', opt: true, url: 'https://maps.google.com/?q=Oxford,+England'},
+        {text: 'Windsor — royal castle and town', opt: true, url: 'https://maps.google.com/?q=Windsor+Castle,+Windsor'},
+        {text: 'Brighton — seaside food and culture', opt: true, url: 'https://maps.google.com/?q=Brighton,+England'},
+        {text: 'Cambridge — historic university city', opt: true, url: 'https://maps.google.com/?q=Cambridge,+England'}
       ]}
     ],
     dining: ['Return to London for dinner'],
@@ -446,17 +499,23 @@ const DAYS = [
     summary: 'A market-and-food day with a contemporary East London feel.',
     sections: [
       { time: 'Morning', icon: '🌅', items: [
-        'Borough Market or Maltby Street Market (choose one)'
+        {text: 'Borough Market', url: 'https://maps.google.com/?q=Borough+Market,+London'},
+        {text: 'or Maltby Street Market (choose one)', url: 'https://maps.google.com/?q=Maltby+Street+Market,+London'}
       ]},
       { time: 'Afternoon', icon: '☀️', items: [
-        'Shoreditch',
-        'Brick Lane',
-        'Spitalfields Market',
-        { text: 'Optional: Tate Modern', opt: true },
-        { text: 'Optional: National Gallery', opt: true }
+        {text: 'Shoreditch', url: 'https://maps.google.com/?q=Shoreditch,+London'},
+        {text: 'Brick Lane', url: 'https://maps.google.com/?q=Brick+Lane,+London'},
+        {text: 'Spitalfields Market', url: 'https://maps.google.com/?q=Old+Spitalfields+Market,+London'},
+        {text: 'Optional: Tate Modern', opt: true, url: 'https://maps.google.com/?q=Tate+Modern,+London'},
+        {text: 'Optional: National Gallery', opt: true, url: 'https://maps.google.com/?q=National+Gallery,+London'}
       ]}
     ],
-    dining: ["Lyle's", 'Smoking Goat', 'Dishoom Shoreditch', 'Gunpowder'],
+    dining: [
+      {name: "Lyle's", url: "https://maps.google.com/?q=Lyle's+Restaurant,+London"},
+      {name: 'Smoking Goat', url: 'https://maps.google.com/?q=Smoking+Goat,+London'},
+      {name: 'Dishoom Shoreditch', url: 'https://maps.google.com/?q=Dishoom+Shoreditch,+London'},
+      {name: 'Gunpowder', url: 'https://maps.google.com/?q=Gunpowder+Restaurant,+London'}
+    ],
     notes: [
       'Choose Borough Market or Maltby Street — both are great.',
       'Tate Modern or National Gallery if energy allows.'
@@ -468,16 +527,20 @@ const DAYS = [
     summary: 'A quiet final morning with a walk and brunch before the airport.',
     sections: [
       { time: 'Morning', icon: '🌳', items: [
-        "Walk in Regent's Park",
-        'Primrose Hill viewpoint'
+        {text: "Walk in Regent's Park", url: 'https://maps.google.com/?q=Regents+Park,+London'},
+        {text: 'Primrose Hill viewpoint', url: 'https://maps.google.com/?q=Primrose+Hill,+London'}
       ]},
       { time: 'Brunch', icon: '☕', items: [
-        'Granger & Co',
-        'Riding House Café',
-        'Dishoom'
+        {text: 'Granger & Co', url: 'https://maps.google.com/?q=Granger+and+Co,+London'},
+        {text: 'Riding House Café', url: 'https://maps.google.com/?q=Riding+House+Cafe,+London'},
+        {text: 'Dishoom', url: 'https://maps.google.com/?q=Dishoom,+London'}
       ]}
     ],
-    dining: ['Granger & Co', 'Riding House Café', 'Dishoom'],
+    dining: [
+      {name: 'Granger & Co', url: 'https://maps.google.com/?q=Granger+and+Co,+London'},
+      {name: 'Riding House Café', url: 'https://maps.google.com/?q=Riding+House+Cafe,+London'},
+      {name: 'Dishoom', url: 'https://maps.google.com/?q=Dishoom,+London'}
+    ],
     notes: [
       'Keep this day light and close to departure logistics.',
       'Primrose Hill has beautiful views of the city skyline.'
@@ -489,7 +552,16 @@ let current = 0;
 
 function item(i) {
   if (typeof i === 'string') return `<li>${i}</li>`;
-  return `<li class="${i.opt ? 'opt' : ''}">${i.text}</li>`;
+  const cls = i.opt ? ' class="opt"' : '';
+  if (i.url) {
+    return `<li${cls}><a href="${i.url}" target="_blank" rel="noopener">${i.text}</a></li>`;
+  }
+  return `<li${cls}>${i.text}</li>`;
+}
+
+function chip(r) {
+  if (typeof r === 'string') return `<div class="chip">${r}</div>`;
+  return `<a href="${r.url}" target="_blank" rel="noopener" class="chip">${r.name}</a>`;
 }
 
 function buildDay(d) {
@@ -514,7 +586,7 @@ function buildDay(d) {
       ${sections}
       <div class="card">
         <div class="card-label"><span>🍽️</span>Dining Options</div>
-        <div class="chips">${d.dining.map(r => `<div class="chip">${r}</div>`).join('')}</div>
+        <div class="chips">${d.dining.map(chip).join('')}</div>
       </div>
       <div class="card">
         <div class="card-label"><span>📌</span>Tips & Notes</div>
@@ -545,13 +617,11 @@ function go(dir) {
   if (n >= 0 && n < DAYS.length) setDay(n);
 }
 
-// Keyboard navigation
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') go(-1);
   if (e.key === 'ArrowRight') go(1);
 });
 
-// Touch swipe
 let tx = 0;
 document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
 document.addEventListener('touchend', e => {
@@ -559,11 +629,9 @@ document.addEventListener('touchend', e => {
   if (Math.abs(diff) > 50) go(diff > 0 ? 1 : -1);
 }, { passive: true });
 
-// Init
 renderNav();
 setDay(0);
 
-// Service worker
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').catch(() => {});

@@ -1,4 +1,4 @@
-const CACHE = 'london-2026-v1';
+const CACHE = 'london-2026-v2';
 const URLS = [
   '/london/',
   '/london/index.html',
