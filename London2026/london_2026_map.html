@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>London 2026 — Trip Map</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #f4f1eb;
+    color: #2a2a2a;
+  }
+
+  header {
+    background: #1b3a5c;
+    color: white;
+    padding: 20px 28px 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  header h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; }
+  header p  { font-size: 0.875rem; opacity: 0.7; }
+
+  .layout {
+    display: flex;
+    height: calc(100vh - 65px);
+  }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    width: 320px;
+    min-width: 280px;
+    background: #fff;
+    overflow-y: auto;
+    border-right: 1px solid #e0ddd5;
+    flex-shrink: 0;
+  }
+
+  .day-section { border-bottom: 1px solid #eeeae2; }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px 10px;
+    cursor: pointer;
+    user-select: none;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: inherit;
+    transition: background 0.15s;
+  }
+  .day-header:hover { filter: brightness(0.96); }
+
+  .day-badge {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 700;
+    flex-shrink: 0;
+    color: white;
+  }
+
+  .day-title { flex: 1; }
+  .day-title strong { display: block; font-size: 0.82rem; font-weight: 600; }
+  .day-title span   { display: block; font-size: 0.72rem; opacity: 0.6; margin-top: 1px; }
+
+  .chevron { font-size: 0.7rem; opacity: 0.4; transition: transform 0.2s; }
+  .day-section.open .chevron { transform: rotate(90deg); }
+
+  .stops { display: none; padding: 0 0 8px; }
+  .day-section.open .stops { display: block; }
+
+  .stop {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 16px 8px 20px;
+    cursor: pointer;
+    border-radius: 6px;
+    margin: 2px 8px;
+    transition: background 0.1s;
+  }
+  .stop:hover { background: #f4f1eb; }
+  .stop.active { background: #e8f0f9; }
+
+  .stop-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .stop-info strong { display: block; font-size: 0.8rem; font-weight: 600; }
+  .stop-info span   { display: block; font-size: 0.72rem; color: #666; margin-top: 1px; line-height: 1.35; }
+  .stop-info .time  { font-size: 0.68rem; color: #999; margin-top: 2px; }
+
+  /* ── Map ── */
+  #map { flex: 1; }
+
+  /* ── Info panel (bottom of sidebar on small screens, or just sidebar) ── */
+  .info-panel {
+    display: none;
+    padding: 14px 16px;
+    background: #f9f7f2;
+    border-top: 1px solid #e0ddd5;
+    font-size: 0.78rem;
+    line-height: 1.55;
+    color: #444;
+  }
+  .info-panel.visible { display: block; }
+  .info-panel strong { display: block; font-size: 0.85rem; color: #1b3a5c; margin-bottom: 4px; }
+
+  /* day color palette */
+  .c1  { background: #3b82c4; }
+  .c2  { background: #1b3a5c; }
+  .c3  { background: #1b3a5c; }
+  .c4  { background: #b03030; }
+  .c5  { background: #2563a0; }
+  .c6  { background: #5b3a8c; }
+  .c7  { background: #b8882a; }
+  .c8  { background: #2e6b4f; }
+  .c9  { background: #3b82c4; }
+
+  .dot1 { background: #3b82c4; }
+  .dot2 { background: #1b3a5c; }
+  .dot3 { background: #1b3a5c; }
+  .dot4 { background: #b03030; }
+  .dot5 { background: #2563a0; }
+  .dot6 { background: #5b3a8c; }
+  .dot7 { background: #b8882a; }
+  .dot8 { background: #2e6b4f; }
+  .dot9 { background: #3b82c4; }
+
+  @media (max-width: 640px) {
+    .layout { flex-direction: column; height: auto; }
+    .sidebar { width: 100%; height: 50vh; border-right: none; border-bottom: 1px solid #e0ddd5; }
+    #map { height: 50vh; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>London 2026</h1>
+  <p>May 2 – 10 &nbsp;·&nbsp; 9 nights &nbsp;·&nbsp; History, Art &amp; Music</p>
+</header>
+
+<div class="layout">
+  <div class="sidebar" id="sidebar">
+    <!-- Days injected by JS -->
+    <div class="info-panel" id="info-panel"></div>
+  </div>
+  <div id="map"></div>
+</div>
+
+<script>
+const DAYS = [
+  {
+    num: 1, label: "Day 1", date: "Sat May 2", title: "Arrival & Easy Walk",
+    stops: [
+      { name: "Covent Garden", note: "Easy orientation walk — markets, cafés, theatres", time: "4:00 PM", lat: 51.5117, lng: -0.124 },
+      { name: "Trafalgar Square / National Gallery", note: "Orient yourself tonight — full visit on Day 2", time: "5:30 PM", lat: 51.5089, lng: -0.1283 },
+    ]
+  },
+  {
+    num: 2, label: "Day 2", date: "Sun May 3", title: "Trafalgar & Covent Garden",
+    stops: [
+      { name: "National Gallery", note: "Free. Focus: Turner, Van Gogh, Vermeer. 90 min.", time: "10:00 AM", lat: 51.5089, lng: -0.1283 },
+      { name: "Covent Garden", note: "Lunch + afternoon wander — lively on Sundays", time: "12:00 PM", lat: 51.5117, lng: -0.124 },
+      { name: "Ronnie Scott's (walk-by)", note: "Optional Soho evening stroll", time: "6:00 PM", lat: 51.5135, lng: -0.1315 },
+    ]
+  },
+  {
+    num: 3, label: "Day 3", date: "Mon May 4", title: "British Museum & Bloomsbury",
+    stops: [
+      { name: "British Museum", note: "Free. Sutton Hoo, Rosetta Stone, Lewis Chessmen. 2 hrs.", time: "10:00 AM", lat: 51.5194, lng: -0.127 },
+    ]
+  },
+  {
+    num: 4, label: "Day 4", date: "Tue May 5", title: "Westminster, Churchill & IWM",
+    stops: [
+      { name: "Churchill War Rooms", note: "Book timed entry in advance. Allow 2+ hrs.", time: "9:30 AM", lat: 51.5022, lng: -0.1294 },
+      { name: "Westminster Abbey", note: "Exterior walk + optional interior (Poets' Corner)", time: "12:30 PM", lat: 51.4994, lng: -0.1273 },
+      { name: "Imperial War Museum", note: "Free. Walk via Lambeth Bridge (~20 min). WWI/WWII halls + Holocaust exhibition.", time: "2:30 PM", lat: 51.4958, lng: -0.1087 },
+    ]
+  },
+  {
+    num: 5, label: "Day 5", date: "Wed May 6", title: "Tower of London & South Bank",
+    stops: [
+      { name: "Tower of London", note: "Book timed entry. Crown Jewels, Yeoman tour. 2+ hrs.", time: "9:00 AM", lat: 51.5081, lng: -0.0759 },
+      { name: "Borough Market", note: "Lunch — walk from Tower via Tower Bridge (~20 min)", time: "12:00 PM", lat: 51.5056, lng: -0.0905 },
+      { name: "Tate Modern / Millennium Bridge", note: "Walk west along South Bank, cross to St Paul's", time: "3:00 PM", lat: 51.5076, lng: -0.0994 },
+    ]
+  },
+  {
+    num: 6, label: "Day 6", date: "Thu May 7", title: "Tate Britain & Chelsea",
+    stops: [
+      { name: "Tate Britain", note: "Free. Turner, William Blake, Pre-Raphaelites. 2 hrs.", time: "10:00 AM", lat: 51.4911, lng: -0.1278 },
+      { name: "Victoria & Albert Museum", note: "Optional afternoon add-on — Tube or long walk from Tate Britain", time: "3:00 PM", lat: 51.4966, lng: -0.1722 },
+    ]
+  },
+  {
+    num: 7, label: "Day 7", date: "Fri May 8", title: "Rock & Music Day",
+    stops: [
+      { name: "Abbey Road Studios", note: "Photograph the crossing, sign the wall. Tube: St John's Wood.", time: "10:00 AM", lat: 51.5322, lng: -0.1778 },
+      { name: "Handel & Hendrix House", note: "Book ahead — small venue, sells out. Opens 11am Wed–Sun.", time: "12:00 PM", lat: 51.5131, lng: -0.1459 },
+      { name: "Denmark Street", note: "Historic music street — guitar shops, studio history", time: "2:00 PM", lat: 51.5153, lng: -0.1292 },
+      { name: "Ronnie Scott's / 100 Club", note: "Evening live music. Book Ronnie's 2–3 weeks ahead.", time: "7:00 PM", lat: 51.5135, lng: -0.1315 },
+    ]
+  },
+  {
+    num: 8, label: "Day 8", date: "Sat May 9", title: "East London Markets & Shoreditch",
+    stops: [
+      { name: "Maltby Street Market", note: "Opens 10am Sat. Food stalls under railway arches — less touristy.", time: "10:00 AM", lat: 51.4995, lng: -0.0759 },
+      { name: "Borough Market", note: "10 min walk from Maltby St — do both if you have energy", time: "11:30 AM", lat: 51.5056, lng: -0.0905 },
+      { name: "Spitalfields Market", note: "Covered market. Tube: London Bridge → Liverpool Street.", time: "1:30 PM", lat: 51.5197, lng: -0.0761 },
+      { name: "Shoreditch", note: "Street art, independent shops, food. Wander north from Spitalfields.", time: "3:00 PM", lat: 51.5244, lng: -0.0773 },
+    ]
+  },
+  {
+    num: 9, label: "Day 9", date: "Sun May 10", title: "Final Morning & Departure",
+    stops: [
+      { name: "Primrose Hill", note: "Best London skyline view. Brunch on Gloucester Ave. Leave by 9am for Heathrow.", time: "7:30 AM", lat: 51.5395, lng: -0.1606 },
+    ]
+  },
+];
+
+// Day colors (hex, matching CSS classes)
+const DAY_COLORS = [
+  "#3b82c4","#1b3a5c","#1b3a5c","#b03030","#2563a0",
+  "#5b3a8c","#b8882a","#2e6b4f","#3b82c4"
+];
+
+let map, markers = [], infoWindow;
+let activeStop = null;
+
+// Build sidebar HTML
+function buildSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const infoPanel = document.getElementById('info-panel');
+
+  DAYS.forEach((day, di) => {
+    const sec = document.createElement('div');
+    sec.className = 'day-section' + (di === 0 ? ' open' : '');
+    sec.innerHTML = `
+      <div class="day-header" onclick="toggleDay(this.parentElement)">
+        <div class="day-badge c${day.num}">${day.num}</div>
+        <div class="day-title">
+          <strong>${day.title}</strong>
+          <span>${day.date}</span>
+        </div>
+        <span class="chevron">▶</span>
+      </div>
+      <div class="stops">
+        ${day.stops.map((s, si) => `
+          <div class="stop" onclick="focusStop(${di},${si})" id="stop-${di}-${si}">
+            <div class="stop-dot dot${day.num}"></div>
+            <div class="stop-info">
+              <strong>${s.name}</strong>
+              <span>${s.note}</span>
+              <span class="time">${s.time}</span>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    sidebar.insertBefore(sec, infoPanel);
+  });
+}
+
+function toggleDay(sec) {
+  sec.classList.toggle('open');
+}
+
+function focusStop(di, si) {
+  const stop = DAYS[di].stops[si];
+  const marker = markers.find(m => m._di === di && m._si === si);
+  if (!marker) return;
+
+  // Deactivate previous
+  document.querySelectorAll('.stop.active').forEach(el => el.classList.remove('active'));
+  document.getElementById(`stop-${di}-${si}`).classList.add('active');
+
+  // Open infoWindow
+  if (infoWindow) infoWindow.close();
+  infoWindow = new google.maps.InfoWindow({
+    content: `
+      <div style="font-family:-apple-system,sans-serif;max-width:220px;padding:4px 2px">
+        <div style="font-size:0.65rem;font-weight:700;color:${DAY_COLORS[di]};text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px">
+          Day ${DAYS[di].num} · ${DAYS[di].date}
+        </div>
+        <div style="font-size:0.9rem;font-weight:600;color:#1a1a1a;margin-bottom:4px">${stop.name}</div>
+        <div style="font-size:0.78rem;color:#555;line-height:1.45">${stop.note}</div>
+        <div style="font-size:0.72rem;color:#999;margin-top:5px">${stop.time}</div>
+      </div>
+    `
+  });
+  infoWindow.open(map, marker);
+  map.panTo(marker.getPosition());
+  map.setZoom(15);
+
+  // Open the day section
+  const daySections = document.querySelectorAll('.day-section');
+  daySections[di].classList.add('open');
+  daySections[di].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: 51.505, lng: -0.09 },
+    zoom: 12,
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: true,
+    styles: [
+      { featureType: "poi", elementType: "labels", stylers: [{ visibility: "off" }] },
+      { featureType: "transit.station", elementType: "labels.icon", stylers: [{ visibility: "off" }] },
+    ]
+  });
+
+  // Plot markers
+  DAYS.forEach((day, di) => {
+    day.stops.forEach((stop, si) => {
+      const marker = new google.maps.Marker({
+        position: { lat: stop.lat, lng: stop.lng },
+        map,
+        title: stop.name,
+        label: {
+          text: String(day.num),
+          color: "white",
+          fontSize: "11px",
+          fontWeight: "bold",
+        },
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 14,
+          fillColor: DAY_COLORS[di],
+          fillOpacity: 1,
+          strokeColor: "white",
+          strokeWeight: 2,
+        }
+      });
+      marker._di = di;
+      marker._si = si;
+      markers.push(marker);
+
+      marker.addListener('click', () => focusStop(di, si));
+    });
+  });
+
+  buildSidebar();
+}
+</script>
+
+<!-- Load Google Maps -->
+<script async
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&callback=initMap">
+</script>
+
+</body>
+</html>
