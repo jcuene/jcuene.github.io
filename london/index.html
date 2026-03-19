@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>London 2026</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1a2744">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="London 2026">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2744;
+      --red: #C8102E;
+      --cream: #f0ece3;
+      --white: #ffffff;
+      --gray: #888;
+      --text: #1a1a1a;
+      --shadow: 0 2px 10px rgba(0,0,0,0.08);
+      --r: 12px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+      max-width: 600px;
+      margin: 0 auto;
+      padding-bottom: 80px;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: var(--navy);
+      padding: 16px 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-top {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .header h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.4px;
+    }
+    .header-sub {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ── Day nav ── */
+    .day-nav {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 10px 0 12px;
+      scrollbar-width: none;
+    }
+    .day-nav::-webkit-scrollbar { display: none; }
+    .pill {
+      flex-shrink: 0;
+      padding: 5px 11px;
+      border-radius: 20px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      background: transparent;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .pill.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+      font-weight: 700;
+    }
+    .pill:hover:not(.active) {
+      border-color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* ── Main ── */
+    main { padding: 14px 14px 0; }
+
+    .day-card { animation: rise 0.22s ease; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Hero card ── */
+    .hero {
+      background: var(--navy);
+      border-radius: var(--r);
+      padding: 18px 18px 16px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+    .day-chip {
+      background: var(--red);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+    .hero-emoji { font-size: 1.6rem; }
+    .hero-weekday {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 4px;
+    }
+    .hero-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    .hero-summary {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.62);
+      line-height: 1.5;
+    }
+
+    /* ── Section cards ── */
+    .card {
+      background: var(--white);
+      border-radius: var(--r);
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      box-shadow: var(--shadow);
+    }
+    .card-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 10px;
+    }
+    .card-label span { font-size: 1rem; }
+
+    .items { list-style: none; }
+    .items li {
+      font-size: 0.92rem;
+      line-height: 1.45;
+      padding: 5px 0 5px 18px;
+      border-bottom: 1px solid #f3f3f3;
+      position: relative;
+    }
+    .items li:last-child { border-bottom: none; }
+    .items li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--red);
+      font-size: 0.8rem;
+      top: 6px;
+    }
+    .items li.opt { color: #aaa; font-style: italic; }
+
+    /* ── Dining ── */
+    .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+    .chip {
+      background: #fff0f1;
+      border: 1px solid #ffd6d8;
+      color: var(--red);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* ── Notes ── */
+    .notes-list { list-style: none; }
+    .notes-list li {
+      font-size: 0.86rem;
+      line-height: 1.5;
+      color: #555;
+      padding: 4px 0 4px 24px;
+      position: relative;
+    }
+    .notes-list li::before {
+      content: '💡';
+      position: absolute;
+      left: 0;
+      font-size: 0.8rem;
+      top: 4px;
+    }
+
+    /* ── Bottom nav ── */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      gap: 10px;
+      padding: 10px 14px;
+      padding-bottom: calc(10px + env(safe-area-inset-bottom));
+      background: var(--cream);
+      border-top: 1px solid rgba(0,0,0,0.07);
+      z-index: 50;
+    }
+    .nav-btn {
+      flex: 1;
+      padding: 13px;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .nav-btn.prev { background: var(--white); color: var(--navy); box-shadow: var(--shadow); }
+    .nav-btn.next { background: var(--navy); color: var(--white); }
+    .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-top">
+    <h1>London 2026</h1>
+    <span class="header-sub">10 Days · 9 Nights</span>
+  </div>
+  <nav class="day-nav" id="dayNav"></nav>
+</header>
+
+<main id="main"></main>
+
+<nav class="bottom-nav">
+  <button class="nav-btn prev" id="btnPrev" onclick="go(-1)">← Previous</button>
+  <button class="nav-btn next" id="btnNext" onclick="go(1)">Next →</button>
+</nav>
+
+<script>
+const DAYS = [
+  {
+    n: 1, weekday: 'Friday', emoji: '✈️',
+    title: 'Arrival & Easy London Walk',
+    summary: 'Arrive, check in, and ease into London with a relaxed central walk.',
+    sections: [
+      { time: 'Afternoon', icon: '☀️', items: [
+        'Arrive in London and check in',
+        'Walk through Covent Garden',
+        'Leicester Square',
+        'Trafalgar Square'
+      ]},
+      { time: 'Evening', icon: '🌆', items: [
+        { text: 'Optional: sunset walk over the Golden Jubilee Bridge', opt: true }
+      ]}
+    ],
+    dining: ['Dishoom', 'Hawksmoor Seven Dials', 'The Barbary'],
+    notes: [
+      'Keep this day flexible — adjust to arrival energy.',
+      'Good first-day orientation on foot.'
+    ]
+  },
+  {
+    n: 2, weekday: 'Saturday', emoji: '🏛️',
+    title: 'British Museum & Bloomsbury',
+    summary: 'World-class museum morning followed by a bookish Bloomsbury afternoon.',
+    sections: [
+      { time: 'Morning', icon: '🌅', items: [
+        'British Museum',
+        'Focus: Sutton Hoo, Rosetta Stone, British archaeology collections'
+      ]},
+      { time: 'Afternoon', icon: '☀️', items: [
+        'Lunch in Bloomsbury',
+        'Walk the Bloomsbury squares',
+        { text: 'Optional: Charles Dickens Museum', opt: true },
+        { text: 'Optional: British Library Treasures Gallery', opt: true }
+      ]}
+    ],
+    dining: ['NOPI', 'St. John', 'Cinnamon Bazaar'],
+    notes: [
+      'Allow 2–3 hours for the British Museum.',
+      'Optional literary stops if mood allows.'
+    ]
+  },
+  {
+    n: 3, weekday: 'Sunday', emoji: '🏰',
+    title: 'Westminster & WWII',
+    summary: 'Churchill, Parliament, Westminster Abbey, and core national history.',
+    sections: [
+      { time: 'Morning', icon: '🌅', items: [
+        'Churchill War Rooms — book in advance'
+      ]},
+      { time: 'Afternoon', icon: '☀️', items: [
+        'Houses of Parliament',
+        'Big Ben',
+        'Westminster Abbey',
+        { text: "Optional: Poets' Corner (inside the Abbey)", opt: true },
+        { text: 'Optional: Thames river cruise', opt: true }
+      ]}
+    ],
+    dining: ['The Harwood Arms', 'The Palomar'],
+    notes: [
+      'Book Churchill War Rooms in advance — it sells out.',
+      'River cruise is a relaxing optional extra.'
+    ]
+  },
+  {
+    n: 4, weekday: 'Monday', emoji: '🗼',
+    title: 'Tower of London & South Bank',
+    summary: 'Major history in the morning, food and river walking in the afternoon.',
+    sections: [
+      { time: 'Morning', icon: '🌅', items: [
+        'Tower of London — allow at least 2 hours'
+      ]},
+      { time: 'Afternoon', icon: '☀️', items: [
+        'Lunch at Borough Market',
+        'Walk along the South Bank',
+        'Cross the Millennium Bridge',
+        "Visit or view St Paul's Cathedral"
+      ]}
+    ],
+    dining: ['Padella', 'El Pastor', 'Wright Bros'],
+    notes: [
+      'Tower of London is a major site — allow at least 2 hours.',
+      'Borough Market is an excellent lunch stop.'
+    ]
+  },
+  {
+    n: 5, weekday: 'Tuesday', emoji: '🎨',
+    title: 'British Art & Chelsea',
+    summary: 'British art in the morning followed by a slower neighborhood afternoon.',
+    sections: [
+      { time: 'Morning', icon: '🌅', items: [
+        'Tate Britain',
+        'Focus: Turner, Blake, Pre-Raphaelites'
+      ]},
+      { time: 'Afternoon', icon: '☀️', items: [
+        'Lunch in Pimlico or Chelsea',
+        "Walk King's Road, Chelsea",
+        { text: 'Optional: Saatchi Gallery (free)', opt: true }
+      ]}
+    ],
+    dining: ['Rabbit', 'The Orange', 'The Five Fields'],
+    notes: [
+      'Tate Britain focus: Turner, Blake, Pre-Raphaelites.',
+      'Saatchi Gallery is free and an easy add-on.'
+    ]
+  },
+  {
+    n: 6, weekday: 'Wednesday', emoji: '🎸',
+    title: 'Rock & Popular Music Day',
+    summary: 'A flexible guided or self-guided music-history day across London.',
+    sections: [
+      { time: 'Option A — Guided Tour', icon: '🗺️', items: [
+        'Abbey Road',
+        'Soho music landmarks',
+        'Chelsea / Rolling Stones history',
+        'Queen and Hendrix sites'
+      ]},
+      { time: 'Option B — Self-Guided', icon: '👟', items: [
+        'Abbey Road Studios (exterior / crosswalk)',
+        'Handel & Hendrix House',
+        'Denmark Street'
+      ]},
+      { time: 'Evening — Live Music', icon: '🎵', items: [
+        "Ronnie Scott's",
+        'The 100 Club',
+        'Jazz Café'
+      ]}
+    ],
+    dining: ['Barrafina', 'Blacklock Soho', 'The Clove Club'],
+    notes: [
+      'Choose one live music venue for the evening.',
+      'Abbey Road crosswalk is free and iconic.'
+    ]
+  },
+  {
+    n: 7, weekday: 'Thursday', emoji: '🌿',
+    title: 'South Kensington Museums & Parks',
+    summary: 'Choose one or two world-class museums, then unwind in the parks.',
+    sections: [
+      { time: 'Choose 1–2 Museums', icon: '🏛️', items: [
+        'Victoria & Albert Museum',
+        'Natural History Museum',
+        'Science Museum'
+      ]},
+      { time: 'Afternoon', icon: '🌳', items: [
+        'Walk through Hyde Park',
+        'Kensington Gardens'
+      ]}
+    ],
+    dining: ['Ottolenghi', 'Maggie Jones', 'Hereford Road'],
+    notes: [
+      'Choose 1–2 museums — do not overload the day.',
+      'Good recovery day after a denser stretch of sightseeing.'
+    ]
+  },
+  {
+    n: 8, weekday: 'Friday', emoji: '🚂',
+    title: 'Day Trip',
+    summary: 'Best fit: Bletchley Park (WWII codebreaking). Several other options available.',
+    sections: [
+      { time: 'Top Pick', icon: '⭐', items: [
+        'Bletchley Park — WWII codebreaking HQ',
+        'Train from London Euston to Bletchley (~50 min)'
+      ]},
+      { time: 'Alternatives', icon: '🗺️', items: [
+        { text: 'Oxford — historic university city', opt: true },
+        { text: 'Windsor — royal castle and town', opt: true },
+        { text: 'Brighton — seaside food and culture', opt: true },
+        { text: 'Cambridge — historic university city', opt: true }
+      ]}
+    ],
+    dining: ['Return to London for dinner'],
+    notes: [
+      'Bletchley Park is the strongest WWII match.',
+      'Choose only one day trip.'
+    ]
+  },
+  {
+    n: 9, weekday: 'Saturday', emoji: '🛒',
+    title: 'East London Food & Markets',
+    summary: 'A market-and-food day with a contemporary East London feel.',
+    sections: [
+      { time: 'Morning', icon: '🌅', items: [
+        'Borough Market or Maltby Street Market (choose one)'
+      ]},
+      { time: 'Afternoon', icon: '☀️', items: [
+        'Shoreditch',
+        'Brick Lane',
+        'Spitalfields Market',
+        { text: 'Optional: Tate Modern', opt: true },
+        { text: 'Optional: National Gallery', opt: true }
+      ]}
+    ],
+    dining: ["Lyle's", 'Smoking Goat', 'Dishoom Shoreditch', 'Gunpowder'],
+    notes: [
+      'Choose Borough Market or Maltby Street — both are great.',
+      'Tate Modern or National Gallery if energy allows.'
+    ]
+  },
+  {
+    n: 10, weekday: 'Sunday', emoji: '🌅',
+    title: 'Final Morning & Departure',
+    summary: 'A quiet final morning with a walk and brunch before the airport.',
+    sections: [
+      { time: 'Morning', icon: '🌳', items: [
+        "Walk in Regent's Park",
+        'Primrose Hill viewpoint'
+      ]},
+      { time: 'Brunch', icon: '☕', items: [
+        'Granger & Co',
+        'Riding House Café',
+        'Dishoom'
+      ]}
+    ],
+    dining: ['Granger & Co', 'Riding House Café', 'Dishoom'],
+    notes: [
+      'Keep this day light and close to departure logistics.',
+      'Primrose Hill has beautiful views of the city skyline.'
+    ]
+  }
+];
+
+let current = 0;
+
+function item(i) {
+  if (typeof i === 'string') return `<li>${i}</li>`;
+  return `<li class="${i.opt ? 'opt' : ''}">${i.text}</li>`;
+}
+
+function buildDay(d) {
+  const sections = d.sections.map(s => `
+    <div class="card">
+      <div class="card-label"><span>${s.icon}</span>${s.time}</div>
+      <ul class="items">${s.items.map(item).join('')}</ul>
+    </div>
+  `).join('');
+
+  return `
+    <div class="day-card">
+      <div class="hero">
+        <div class="hero-top">
+          <div class="day-chip">Day ${d.n}</div>
+          <div class="hero-emoji">${d.emoji}</div>
+        </div>
+        <div class="hero-weekday">${d.weekday}</div>
+        <div class="hero-title">${d.title}</div>
+        <div class="hero-summary">${d.summary}</div>
+      </div>
+      ${sections}
+      <div class="card">
+        <div class="card-label"><span>🍽️</span>Dining Options</div>
+        <div class="chips">${d.dining.map(r => `<div class="chip">${r}</div>`).join('')}</div>
+      </div>
+      <div class="card">
+        <div class="card-label"><span>📌</span>Tips & Notes</div>
+        <ul class="notes-list">${d.notes.map(n => `<li>${n}</li>`).join('')}</ul>
+      </div>
+    </div>
+  `;
+}
+
+function renderNav() {
+  document.getElementById('dayNav').innerHTML = DAYS.map((d, i) =>
+    `<button class="pill${i === current ? ' active' : ''}" onclick="setDay(${i})">Day ${d.n} · ${d.weekday.slice(0,3)}</button>`
+  ).join('');
+}
+
+function setDay(i) {
+  current = i;
+  renderNav();
+  document.getElementById('main').innerHTML = buildDay(DAYS[i]);
+  document.getElementById('dayNav').children[i]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById('btnPrev').disabled = i === 0;
+  document.getElementById('btnNext').disabled = i === DAYS.length - 1;
+}
+
+function go(dir) {
+  const n = current + dir;
+  if (n >= 0 && n < DAYS.length) setDay(n);
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft') go(-1);
+  if (e.key === 'ArrowRight') go(1);
+});
+
+// Touch swipe
+let tx = 0;
+document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+document.addEventListener('touchend', e => {
+  const diff = tx - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) go(diff > 0 ? 1 : -1);
+}, { passive: true });
+
+// Init
+renderNav();
+setDay(0);
+
+// Service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
