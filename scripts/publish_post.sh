@@ -38,8 +38,18 @@ if [ -z "$title" ]; then
   title="$slug"
 fi
 
-site_url=$(sed -n 's/^url:[[:space:]]*"\{0,1\}\(.*\)"\{0,1\}$/\1/p' _config.yml | head -n 1)
-baseurl=$(sed -n 's/^baseurl:[[:space:]]*"\{0,1\}\(.*\)"\{0,1\}[[:space:]]*#\{0,1\}.*$/\1/p' _config.yml | head -n 1)
+site_url=$(
+  sed -n 's/^url:[[:space:]]*//p' _config.yml \
+    | head -n 1 \
+    | sed 's/[[:space:]]*#.*$//' \
+    | sed 's/^"//; s/"$//'
+)
+baseurl=$(
+  sed -n 's/^baseurl:[[:space:]]*//p' _config.yml \
+    | head -n 1 \
+    | sed 's/[[:space:]]*#.*$//' \
+    | sed 's/^"//; s/"$//'
+)
 
 if [ -n "$baseurl" ]; then
   post_url="${site_url%/}/${baseurl#/}/${year}/${month}/${day}/${slug}/"
