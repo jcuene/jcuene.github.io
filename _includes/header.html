@@ -1,5 +1,7 @@
-<header class="site-header">
-  <div class="container">
+<aside class="site-sidebar">
+  <div class="sidebar-image" aria-hidden="true"></div>
+  <div class="sidebar-overlay" aria-hidden="true"></div>
+  <div class="sidebar-inner">
     <a class="site-title" href="{{ '/' | relative_url }}">
       <span class="site-title-mark">JC</span>
       <span class="site-title-text">
@@ -7,10 +9,16 @@
         <span>Notes on AI-assisted building</span>
       </span>
     </a>
+
+    <div class="sidebar-copy">
+      <p class="sidebar-kicker">Hyde-inspired layout</p>
+      <p>A quieter, more personal home for writing about AI tools, projects, and experiments worth remembering.</p>
+    </div>
+
     <nav class="site-nav">
       <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="active"{% endif %}>Home</a>
       <a href="{{ '/blog/' | relative_url }}"{% if page.url == '/blog/' %} class="active"{% endif %}>Blog</a>
       <a href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} class="active"{% endif %}>About</a>
     </nav>
   </div>
-</header>
+</aside>
