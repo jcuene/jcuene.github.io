@@ -1,6 +1,12 @@
 <header class="site-header">
   <div class="container">
-    <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <a class="site-title" href="{{ '/' | relative_url }}">
+      <span class="site-title-mark">JC</span>
+      <span class="site-title-text">
+        <strong>{{ site.title }}</strong>
+        <span>Notes on AI-assisted building</span>
+      </span>
+    </a>
     <nav class="site-nav">
       <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="active"{% endif %}>Home</a>
       <a href="{{ '/blog/' | relative_url }}"{% if page.url == '/blog/' %} class="active"{% endif %}>Blog</a>

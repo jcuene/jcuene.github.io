@@ -3,8 +3,11 @@ layout: default
 ---
 
 <article class="page">
-  <h1 class="page-title">{{ page.title }}</h1>
-  {{ content }}
+  <section class="section-heading">
+    <p class="eyebrow">Archive</p>
+    <h1 class="page-title">{{ page.title }}</h1>
+    <div class="page-intro">{{ content }}</div>
+  </section>
 
   {% if site.posts.size > 0 %}
   <ul class="blog-list">

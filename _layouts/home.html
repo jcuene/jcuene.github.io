@@ -3,9 +3,20 @@ layout: default
 ---
 
 <div class="home">
-  {{ content }}
+  <section class="hero">
+    <p class="eyebrow">Personal blog</p>
+    <h1>Writing about AI tools, experiments, and the joy of learning in public.</h1>
+    <p class="hero-copy">{{ content | strip_html }}</p>
+    <div class="hero-actions">
+      <a class="button-primary" href="{{ '/blog/' | relative_url }}">Read the blog</a>
+      <a class="button-secondary" href="{{ '/about/' | relative_url }}">About the author</a>
+    </div>
+  </section>
 
-  <h2>Recent Posts</h2>
+  <section class="section-heading">
+    <p class="eyebrow">Latest writing</p>
+    <h2>Recent Posts</h2>
+  </section>
   {% if site.posts.size > 0 %}
   <ul class="post-list">
     {% for post in site.posts limit:5 %}
