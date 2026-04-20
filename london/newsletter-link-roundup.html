@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newsletter Link Roundup</title>
+  <style>
+    :root {
+      --bg: #f5f1e8;
+      --card: #fffdf8;
+      --ink: #1d1d1b;
+      --muted: #6d665e;
+      --accent: #b04a2f;
+      --accent-dark: #7f331f;
+      --line: #ded6ca;
+      --quote: #f2ebe2;
+      --shadow: 0 18px 48px rgba(43, 30, 18, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at top left, rgba(176, 74, 47, 0.08), transparent 32%),
+        linear-gradient(180deg, #f8f4ec 0%, var(--bg) 100%);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    .page {
+      width: min(980px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 80px;
+    }
+
+    .hero,
+    .panel {
+      background: color-mix(in srgb, var(--card) 88%, white);
+      border: 1px solid rgba(125, 107, 87, 0.14);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 30px;
+      margin-bottom: 20px;
+    }
+
+    .kicker {
+      font: 600 0.78rem/1.2 Arial, Helvetica, sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    h1, h2 {
+      margin: 0;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 5vw, 3.9rem);
+      line-height: 0.95;
+      max-width: 12ch;
+    }
+
+    .lede {
+      margin: 18px 0 0;
+      max-width: 60ch;
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.65;
+    }
+
+    .layout {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 320px minmax(0, 1fr);
+      align-items: start;
+    }
+
+    .panel {
+      padding: 22px;
+    }
+
+    .panel h2 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+
+    .small {
+      color: var(--muted);
+      font: 0.94rem/1.6 Arial, Helvetica, sans-serif;
+    }
+
+    .steps {
+      margin: 16px 0 0;
+      padding-left: 18px;
+      color: var(--ink);
+      font: 0.95rem/1.65 Arial, Helvetica, sans-serif;
+    }
+
+    .steps li + li {
+      margin-top: 10px;
+    }
+
+    .bookmarklet-wrap {
+      margin: 20px 0 14px;
+      padding: 18px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #faefe6, #fffaf4);
+      border: 1px solid #ecd7c9;
+    }
+
+    .bookmarklet {
+      display: inline-block;
+      padding: 12px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      background: var(--accent);
+      color: white;
+      font: 700 0.95rem/1 Arial, Helvetica, sans-serif;
+      box-shadow: 0 10px 24px rgba(176, 74, 47, 0.2);
+    }
+
+    .bookmarklet:hover {
+      background: var(--accent-dark);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 6px;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 11px 15px;
+      font: 600 0.92rem/1 Arial, Helvetica, sans-serif;
+      transition: transform 0.12s ease, opacity 0.12s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    .primary {
+      background: var(--ink);
+      color: white;
+    }
+
+    .secondary {
+      background: #eee5da;
+      color: var(--ink);
+    }
+
+    .entry-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .entry {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fffdfa;
+    }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .entry-title {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 1.15rem;
+      line-height: 1.25;
+    }
+
+    .entry-title:hover {
+      color: var(--accent);
+    }
+
+    .stamp {
+      white-space: nowrap;
+      color: var(--muted);
+      font: 0.85rem/1.3 Arial, Helvetica, sans-serif;
+    }
+
+    blockquote {
+      margin: 0 0 12px;
+      padding: 14px 16px;
+      border-left: 4px solid var(--accent);
+      background: var(--quote);
+      color: #413a33;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .note {
+      margin: 0;
+      font: 0.96rem/1.7 Arial, Helvetica, sans-serif;
+    }
+
+    .empty {
+      border: 1px dashed var(--line);
+      border-radius: 16px;
+      padding: 26px;
+      color: var(--muted);
+      text-align: center;
+      font: 0.96rem/1.7 Arial, Helvetica, sans-serif;
+    }
+
+    .status {
+      min-height: 1.4em;
+      color: var(--accent-dark);
+      font: 600 0.9rem/1.4 Arial, Helvetica, sans-serif;
+    }
+
+    .code {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #f4eee5;
+      color: #4c443c;
+      font: 0.82rem/1.55 "SFMono-Regular", Menlo, Consolas, monospace;
+      overflow-wrap: anywhere;
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="kicker">Link Roundup Tool</div>
+      <h1>Save quotes while you browse, then paste the roundup into Substack.</h1>
+      <p class="lede">
+        This page installs a bookmarklet, stores captured links in your browser, and exports a rich-text roundup with clickable titles,
+        quotes, timestamps, and your notes.
+      </p>
+    </section>
+
+    <div class="layout">
+      <aside class="panel">
+        <h2>Install</h2>
+        <p class="small">
+          Open this page from a stable URL, then drag the button below into Chrome’s bookmarks bar.
+        </p>
+        <div class="bookmarklet-wrap">
+          <a id="bookmarklet-link" class="bookmarklet" href="#">Save Quote to Roundup</a>
+          <div class="code" id="bookmarklet-source">Building bookmarklet...</div>
+        </div>
+        <ol class="steps">
+          <li>Select a quote on any article page.</li>
+          <li>Click the bookmarklet.</li>
+          <li>Add your note in the modal and press Save.</li>
+          <li>Come back here when you want to export the roundup.</li>
+        </ol>
+        <p class="small">
+          For local-only use, serving this page at <code>http://127.0.0.1:8000/</code> works well with a tiny local web server.
+        </p>
+      </aside>
+
+      <main class="panel">
+        <h2>Saved Links</h2>
+        <p class="small">
+          Entries are stored in this browser via localStorage. Export when you are ready to paste into Substack.
+        </p>
+        <div class="actions">
+          <button id="copy-rich" class="primary">Copy Rich Text for Substack</button>
+          <button id="copy-plain" class="secondary">Copy Plain Text</button>
+          <button id="download-html" class="secondary">Download HTML Archive</button>
+          <button id="clear-all" class="secondary">Clear Saved Entries</button>
+        </div>
+        <p class="status" id="status"></p>
+        <div id="entries" class="entry-list"></div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "newsletter-roundup-entries-v1";
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function loadEntries() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function saveEntries(entries) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+    }
+
+    function formatStamp(isoString) {
+      return new Date(isoString).toLocaleString([], {
+        dateStyle: "medium",
+        timeStyle: "short"
+      });
+    }
+
+    function renderEntries() {
+      const entries = loadEntries().sort((a, b) => new Date(b.capturedAt) - new Date(a.capturedAt));
+      const container = document.getElementById("entries");
+
+      if (!entries.length) {
+        container.innerHTML = '<div class="empty">No saved links yet. Highlight a quote on any page and use the bookmarklet.</div>';
+        return;
+      }
+
+      container.innerHTML = entries.map((entry) => `
+        <article class="entry">
+          <div class="entry-header">
+            <a class="entry-title" href="${escapeHtml(entry.url)}" target="_blank" rel="noreferrer">${escapeHtml(entry.title)}</a>
+            <div class="stamp">${escapeHtml(formatStamp(entry.capturedAt))}</div>
+          </div>
+          ${entry.quote ? `<blockquote>${escapeHtml(entry.quote)}</blockquote>` : ""}
+          ${entry.note ? `<p class="note">${escapeHtml(entry.note)}</p>` : '<p class="note"><em>No note added.</em></p>'}
+        </article>
+      `).join("");
+    }
+
+    function toRichHtml(entries) {
+      return entries.map((entry) => {
+        const title = escapeHtml(entry.title);
+        const url = escapeHtml(entry.url);
+        const stamp = escapeHtml(formatStamp(entry.capturedAt));
+        const quote = entry.quote ? `<blockquote>${escapeHtml(entry.quote)}</blockquote>` : "";
+        const note = entry.note ? `<p>${escapeHtml(entry.note)}</p>` : "";
+        return `<p><strong><a href="${url}">${title}</a></strong> <em>${stamp}</em></p>${quote}${note}`;
+      }).join("<p></p>");
+    }
+
+    function toPlainText(entries) {
+      return entries.map((entry) => {
+        const lines = [
+          `${entry.title} - ${entry.url}`,
+          formatStamp(entry.capturedAt)
+        ];
+        if (entry.quote) lines.push(`"${entry.quote}"`);
+        if (entry.note) lines.push(entry.note);
+        return lines.join("\n");
+      }).join("\n\n");
+    }
+
+    async function copyRichText() {
+      const entries = loadEntries().sort((a, b) => new Date(a.capturedAt) - new Date(b.capturedAt));
+      if (!entries.length) {
+        setStatus("Nothing to copy yet.");
+        return;
+      }
+
+      const html = toRichHtml(entries);
+      const text = toPlainText(entries);
+
+      try {
+        await navigator.clipboard.write([
+          new ClipboardItem({
+            "text/html": new Blob([html], { type: "text/html" }),
+            "text/plain": new Blob([text], { type: "text/plain" })
+          })
+        ]);
+        setStatus("Rich text copied. Paste directly into Substack.");
+      } catch (error) {
+        setStatus("Clipboard copy failed in this browser context. Try the plain text copy or download.");
+      }
+    }
+
+    async function copyPlainText() {
+      const entries = loadEntries().sort((a, b) => new Date(a.capturedAt) - new Date(b.capturedAt));
+      if (!entries.length) {
+        setStatus("Nothing to copy yet.");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(toPlainText(entries));
+        setStatus("Plain text copied.");
+      } catch (error) {
+        setStatus("Plain text copy failed in this browser context.");
+      }
+    }
+
+    function downloadHtmlArchive() {
+      const entries = loadEntries().sort((a, b) => new Date(a.capturedAt) - new Date(b.capturedAt));
+      if (!entries.length) {
+        setStatus("Nothing to download yet.");
+        return;
+      }
+
+      const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Newsletter Roundup Export</title></head><body>${toRichHtml(entries)}</body></html>`;
+      const blob = new Blob([html], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = "newsletter-roundup-export.html";
+      anchor.click();
+      URL.revokeObjectURL(url);
+      setStatus("HTML archive downloaded.");
+    }
+
+    function setStatus(message) {
+      document.getElementById("status").textContent = message;
+    }
+
+    function encodePayload(data) {
+      return btoa(unescape(encodeURIComponent(JSON.stringify(data))))
+        .replace(/\+/g, "-")
+        .replace(/\//g, "_")
+        .replace(/=+$/g, "");
+    }
+
+    function decodePayload(value) {
+      const padded = value.replace(/-/g, "+").replace(/_/g, "/") + "=".repeat((4 - value.length % 4) % 4);
+      return JSON.parse(decodeURIComponent(escape(atob(padded))));
+    }
+
+    function buildBookmarklet(targetUrl) {
+      const code = `(function(){var d=document,w=window,s=(w.getSelection?w.getSelection().toString():d.getSelection?d.getSelection().toString():d.selection?d.selection.createRange().text:"").trim(),title=d.title||"Untitled page",url=w.location.href,overlay=d.createElement("div"),box=d.createElement("div"),label=d.createElement("label"),area=d.createElement("textarea"),actions=d.createElement("div"),save=d.createElement("button"),cancel=d.createElement("button"),hint=d.createElement("div");function close(){overlay.remove()}overlay.style.cssText="position:fixed;inset:0;background:rgba(20,20,20,.55);z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:20px;";box.style.cssText="width:min(560px,100%);background:#fffaf4;color:#1d1d1b;border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.25);padding:20px;font:16px/1.45 Arial,sans-serif;";label.innerHTML="<strong>Save to roundup</strong><div style='margin-top:6px;color:#6d665e;font-size:14px'>"+(s?"Quote selected and ready to save.":"No quote selected. You can still save the page and add a note.")+"</div>";area.placeholder="Add your comment or note here";area.style.cssText="width:100%;min-height:120px;margin-top:14px;padding:12px 14px;border:1px solid #d6c9bb;border-radius:12px;font:15px/1.45 Arial,sans-serif;resize:vertical;";hint.style.cssText="margin-top:10px;padding:10px 12px;background:#f4eee5;border-radius:12px;font-size:13px;color:#5a5148;max-height:120px;overflow:auto;";hint.textContent=s?('Quote: '+s):('Page: '+title);actions.style.cssText="display:flex;gap:10px;justify-content:flex-end;margin-top:14px;";cancel.textContent="Cancel";save.textContent="Save";cancel.style.cssText="border:0;background:#eee5da;color:#1d1d1b;border-radius:999px;padding:10px 14px;font-weight:600;cursor:pointer;";save.style.cssText="border:0;background:#b04a2f;color:#fff;border-radius:999px;padding:10px 14px;font-weight:700;cursor:pointer;";cancel.onclick=close;save.onclick=function(){var payload=${JSON.stringify(targetUrl)}+'?add='+encodeURIComponent((function(obj){return btoa(unescape(encodeURIComponent(JSON.stringify(obj)))).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,'')})({capturedAt:new Date().toISOString(),title:title,url:url,quote:s,note:area.value.trim()}));w.open(payload,'_blank','noopener,noreferrer');close()};overlay.onclick=function(e){if(e.target===overlay)close()};actions.append(cancel,save);box.append(label,area,hint,actions);overlay.appendChild(box);d.body.appendChild(overlay);area.focus()})();`;
+      return "javascript:" + code;
+    }
+
+    function handleIncomingEntry() {
+      const params = new URLSearchParams(window.location.search);
+      const payload = params.get("add");
+      if (!payload) return;
+
+      try {
+        const entry = decodePayload(payload);
+        const entries = loadEntries();
+        entries.push(entry);
+        saveEntries(entries);
+        renderEntries();
+        setStatus(`Saved "${entry.title}" to your roundup.`);
+        history.replaceState({}, "", window.location.pathname);
+      } catch (error) {
+        setStatus("I couldn't read that saved entry.");
+      }
+    }
+
+    function installBookmarklet() {
+      const targetUrl = window.location.origin + window.location.pathname;
+      const href = buildBookmarklet(targetUrl);
+      const link = document.getElementById("bookmarklet-link");
+      link.href = href;
+      document.getElementById("bookmarklet-source").textContent = href;
+    }
+
+    document.getElementById("copy-rich").addEventListener("click", copyRichText);
+    document.getElementById("copy-plain").addEventListener("click", copyPlainText);
+    document.getElementById("download-html").addEventListener("click", downloadHtmlArchive);
+    document.getElementById("clear-all").addEventListener("click", () => {
+      if (!confirm("Clear all saved roundup entries?")) return;
+      localStorage.removeItem(STORAGE_KEY);
+      renderEntries();
+      setStatus("Saved entries cleared.");
+    });
+
+    installBookmarklet();
+    handleIncomingEntry();
+    renderEntries();
+  </script>
+</body>
+</html>
