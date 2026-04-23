@@ -1,386 +1,158 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Newsletter Link Archive</title>
-  <style>
-    :root {
-      --bg: #f6f1e8;
-      --paper: #fffdf9;
-      --ink: #1e1b18;
-      --muted: #6f675d;
-      --accent: #b04a2f;
-      --accent-dark: #84331f;
-      --line: #e0d5c8;
-      --shadow: 0 18px 44px rgba(63, 43, 24, 0.08);
-      --radius: 20px;
-    }
+---
+layout: default
+title: Newsletter Link Archive
+permalink: /newsletter-link-archive.html
+---
 
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      background:
-        radial-gradient(circle at top, rgba(176, 74, 47, 0.08), transparent 34%),
-        linear-gradient(180deg, #fbf8f2 0%, var(--bg) 100%);
-      color: var(--ink);
-      font-family: Georgia, "Times New Roman", serif;
-      min-height: 100vh;
-    }
-
-    .page {
-      width: min(900px, calc(100vw - 28px));
-      margin: 0 auto;
-      padding: 36px 0 64px;
-    }
-
-    .hero,
-    .panel,
-    .entry {
-      background: color-mix(in srgb, var(--paper) 90%, white);
-      border: 1px solid rgba(125, 107, 87, 0.14);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .hero,
-    .panel {
-      padding: 24px;
-    }
-
-    .hero {
-      margin-bottom: 18px;
-    }
-
-    .eyebrow,
-    .meta,
-    .pager,
-    .hint {
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    .eyebrow {
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.78rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    h1, h2 {
-      margin: 0;
-      letter-spacing: -0.02em;
-    }
-
-    h1 {
-      font-size: clamp(2rem, 4vw, 3.4rem);
-      line-height: 0.97;
-      max-width: 12ch;
-    }
-
-    .intro {
-      margin: 16px 0 0;
-      max-width: 58ch;
-      color: var(--muted);
-      line-height: 1.65;
-      font-size: 1.04rem;
-    }
-
-    .panel {
-      margin-bottom: 18px;
-    }
-
-    .toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 14px;
-      align-items: center;
-    }
-
-    .meta {
-      color: var(--muted);
-      font-size: 0.94rem;
-      line-height: 1.5;
-    }
-
-    .link-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .action {
-      display: inline-flex;
-      align-items: center;
-      border-radius: 999px;
-      text-decoration: none;
-      padding: 10px 14px;
-      font: 700 0.92rem/1 Arial, Helvetica, sans-serif;
-    }
-
-    .action.primary {
-      background: var(--ink);
-      color: white;
-    }
-
-    .action.secondary {
-      background: #eee5da;
-      color: var(--ink);
-    }
-
-    .entries {
-      display: grid;
-      gap: 16px;
-    }
-
-    .entry {
-      padding: 20px;
-    }
-
-    .entry-head {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: baseline;
-      margin-bottom: 12px;
-    }
-
-    .entry-title {
-      color: var(--ink);
-      text-decoration: none;
-      font-size: 1.18rem;
-      line-height: 1.28;
-    }
-
-    .entry-title:hover {
-      color: var(--accent);
-    }
-
-    .stamp {
-      color: var(--muted);
-      white-space: nowrap;
-      font: 0.84rem/1.3 Arial, Helvetica, sans-serif;
-    }
-
-    blockquote {
-      margin: 0 0 12px;
-      padding: 14px 16px;
-      border-left: 4px solid var(--accent);
-      background: #f3ece3;
-      color: #433c34;
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-
-    .note {
-      margin: 0;
-      font: 0.97rem/1.7 Arial, Helvetica, sans-serif;
-    }
-
-    .empty {
-      padding: 34px 22px;
-      text-align: center;
-      color: var(--muted);
-      border: 1px dashed var(--line);
-      border-radius: var(--radius);
-      font: 0.98rem/1.7 Arial, Helvetica, sans-serif;
-      background: rgba(255, 253, 249, 0.75);
-    }
-
-    .pager {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      justify-content: center;
-      margin-top: 22px;
-    }
-
-    .pager button {
-      border: 0;
-      cursor: pointer;
-      border-radius: 999px;
-      padding: 10px 14px;
-      background: #eee5da;
-      color: var(--ink);
-      font: 700 0.9rem/1 Arial, Helvetica, sans-serif;
-    }
-
-    .pager button[disabled] {
-      cursor: default;
-      opacity: 0.45;
-    }
-
-    .hint {
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.6;
-      text-align: center;
-    }
-
-    @media (max-width: 640px) {
-      .hero, .panel, .entry { padding: 18px; }
-      .toolbar { align-items: flex-start; }
-    }
-  </style>
-</head>
-<body>
-  <div class="page">
-    <section class="hero">
-      <div class="eyebrow">Newsletter Archive</div>
-      <h1>Every captured link, note, and quote in one place.</h1>
-      <p class="intro">
-        This archive reads from the same local browser storage as your roundup collector and shows fifty saved links at a time.
-      </p>
-    </section>
-
-    <section class="panel">
-      <div class="toolbar">
-        <div class="meta" id="summary">Loading saved links...</div>
-        <div class="link-row">
-          <a class="action primary" href="/newsletter-link-roundup.html">Open Collector</a>
-          <a class="action secondary" href="#top" id="refresh-link">Refresh Archive</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="entries" id="entries"></section>
-    <nav class="pager" id="pager" aria-label="Archive pagination"></nav>
-    <p class="hint">
-      This page only shows links saved in this browser on this device, because the captures live in localStorage.
+<div class="newsletter-archive-page">
+  <section class="hero newsletter-hero">
+    <div class="eyebrow">Newsletter Archive</div>
+    <h1>Every captured link, note, and quote in one place.</h1>
+    <p class="intro">
+      This archive reads from the same local browser storage as your roundup collector and shows fifty saved links at a time.
     </p>
-  </div>
+  </section>
 
-  <script>
-    const STORAGE_KEY = "newsletter-roundup-entries-v1";
-    const PAGE_SIZE = 50;
+  <section class="newsletter-panel newsletter-toolbar-panel">
+    <div class="toolbar">
+      <div class="meta" id="summary">Loading saved links...</div>
+      <div class="link-row">
+        <a class="action primary" href="/newsletter-link-roundup.html">Open Collector</a>
+        <a class="action secondary" href="#top" id="refresh-link">Refresh Archive</a>
+      </div>
+    </div>
+  </section>
 
-    function escapeHtml(value) {
-      return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
+  <section class="entries" id="entries"></section>
+  <nav class="pager" id="pager" aria-label="Archive pagination"></nav>
+  <p class="hint">
+    This page only shows links saved in this browser on this device, because the captures live in localStorage.
+  </p>
+</div>
+
+<script>
+  const STORAGE_KEY = "newsletter-roundup-entries-v1";
+  const PAGE_SIZE = 50;
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function loadEntries() {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      return parsed.sort((a, b) => new Date(b.capturedAt) - new Date(a.capturedAt));
+    } catch (error) {
+      return [];
     }
+  }
 
-    function loadEntries() {
-      try {
-        const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-        return parsed.sort((a, b) => new Date(b.capturedAt) - new Date(a.capturedAt));
-      } catch (error) {
-        return [];
-      }
-    }
-
-    function formatStamp(isoString) {
-      return new Date(isoString).toLocaleString([], {
-        dateStyle: "medium",
-        timeStyle: "short"
-      });
-    }
-
-    function getPageFromQuery(totalPages) {
-      const value = Number(new URLSearchParams(window.location.search).get("page")) || 1;
-      return Math.min(Math.max(value, 1), Math.max(totalPages, 1));
-    }
-
-    function setPage(page) {
-      const url = new URL(window.location.href);
-      url.searchParams.set("page", page);
-      history.replaceState({}, "", url);
-      render();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function renderEntries(entries, page) {
-      const start = (page - 1) * PAGE_SIZE;
-      const pageEntries = entries.slice(start, start + PAGE_SIZE);
-      const container = document.getElementById("entries");
-
-      if (!pageEntries.length) {
-        container.innerHTML = '<div class="empty">No links saved yet. Use the collector page and this archive will fill in automatically.</div>';
-        return;
-      }
-
-      container.innerHTML = pageEntries.map((entry) => `
-        <article class="entry">
-          <div class="entry-head">
-            <a class="entry-title" href="${escapeHtml(entry.url)}" target="_blank" rel="noreferrer">${escapeHtml(entry.title)}</a>
-            <div class="stamp">${escapeHtml(formatStamp(entry.capturedAt))}</div>
-          </div>
-          ${entry.quote ? `<blockquote>${escapeHtml(entry.quote)}</blockquote>` : ""}
-          <p class="note">${entry.note ? escapeHtml(entry.note) : "<em>No note added.</em>"}</p>
-        </article>
-      `).join("");
-    }
-
-    function renderPager(totalPages, currentPage) {
-      const pager = document.getElementById("pager");
-      if (totalPages <= 1) {
-        pager.innerHTML = "";
-        return;
-      }
-
-      const buttons = [];
-      buttons.push(`<button ${currentPage === 1 ? "disabled" : ""} data-page="${currentPage - 1}">Previous</button>`);
-
-      for (let page = 1; page <= totalPages; page += 1) {
-        if (
-          page === 1 ||
-          page === totalPages ||
-          Math.abs(page - currentPage) <= 1
-        ) {
-          buttons.push(`<button ${page === currentPage ? "disabled" : ""} data-page="${page}">Page ${page}</button>`);
-        } else if (
-          Math.abs(page - currentPage) === 2 &&
-          !buttons[buttons.length - 1]?.includes("...")
-        ) {
-          buttons.push(`<span>...</span>`);
-        }
-      }
-
-      buttons.push(`<button ${currentPage === totalPages ? "disabled" : ""} data-page="${currentPage + 1}">Next</button>`);
-      pager.innerHTML = buttons.join("");
-
-      pager.querySelectorAll("button[data-page]").forEach((button) => {
-        button.addEventListener("click", () => setPage(Number(button.dataset.page)));
-      });
-    }
-
-    function renderSummary(totalEntries, currentPage, totalPages) {
-      const summary = document.getElementById("summary");
-      if (!totalEntries) {
-        summary.textContent = "No saved links yet in this browser.";
-        return;
-      }
-
-      const start = (currentPage - 1) * PAGE_SIZE + 1;
-      const end = Math.min(currentPage * PAGE_SIZE, totalEntries);
-      summary.textContent = `Showing ${start}-${end} of ${totalEntries} saved links. Page ${currentPage} of ${totalPages}.`;
-    }
-
-    function render() {
-      const entries = loadEntries();
-      const totalPages = Math.ceil(entries.length / PAGE_SIZE) || 1;
-      const currentPage = getPageFromQuery(totalPages);
-      renderSummary(entries.length, currentPage, totalPages);
-      renderEntries(entries, currentPage);
-      renderPager(totalPages, currentPage);
-    }
-
-    document.getElementById("refresh-link").addEventListener("click", (event) => {
-      event.preventDefault();
-      render();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+  function formatStamp(isoString) {
+    return new Date(isoString).toLocaleString([], {
+      dateStyle: "medium",
+      timeStyle: "short"
     });
+  }
 
+  function getPageFromQuery(totalPages) {
+    const value = Number(new URLSearchParams(window.location.search).get("page")) || 1;
+    return Math.min(Math.max(value, 1), Math.max(totalPages, 1));
+  }
+
+  function setPage(page) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("page", page);
+    history.replaceState({}, "", url);
     render();
-  </script>
-</body>
-</html>
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function renderEntries(entries, page) {
+    const start = (page - 1) * PAGE_SIZE;
+    const pageEntries = entries.slice(start, start + PAGE_SIZE);
+    const container = document.getElementById("entries");
+
+    if (!pageEntries.length) {
+      container.innerHTML = '<div class="empty">No links saved yet. Use the collector page and this archive will fill in automatically.</div>';
+      return;
+    }
+
+    container.innerHTML = pageEntries.map((entry) => `
+      <article class="entry">
+        <div class="entry-head">
+          <a class="entry-title" href="${escapeHtml(entry.url)}" target="_blank" rel="noreferrer">${escapeHtml(entry.title)}</a>
+          <div class="stamp">${escapeHtml(formatStamp(entry.capturedAt))}</div>
+        </div>
+        ${entry.quote ? `<blockquote>${escapeHtml(entry.quote)}</blockquote>` : ""}
+        <p class="note">${entry.note ? escapeHtml(entry.note) : "<em>No note added.</em>"}</p>
+      </article>
+    `).join("");
+  }
+
+  function renderPager(totalPages, currentPage) {
+    const pager = document.getElementById("pager");
+    if (totalPages <= 1) {
+      pager.innerHTML = "";
+      return;
+    }
+
+    const buttons = [];
+    buttons.push(`<button ${currentPage === 1 ? "disabled" : ""} data-page="${currentPage - 1}">Previous</button>`);
+
+    for (let page = 1; page <= totalPages; page += 1) {
+      if (
+        page === 1 ||
+        page === totalPages ||
+        Math.abs(page - currentPage) <= 1
+      ) {
+        buttons.push(`<button ${page === currentPage ? "disabled" : ""} data-page="${page}">Page ${page}</button>`);
+      } else if (
+        Math.abs(page - currentPage) === 2 &&
+        !buttons[buttons.length - 1]?.includes("...")
+      ) {
+        buttons.push(`<span>...</span>`);
+      }
+    }
+
+    buttons.push(`<button ${currentPage === totalPages ? "disabled" : ""} data-page="${currentPage + 1}">Next</button>`);
+    pager.innerHTML = buttons.join("");
+
+    pager.querySelectorAll("button[data-page]").forEach((button) => {
+      button.addEventListener("click", () => setPage(Number(button.dataset.page)));
+    });
+  }
+
+  function renderSummary(totalEntries, currentPage, totalPages) {
+    const summary = document.getElementById("summary");
+    if (!totalEntries) {
+      summary.textContent = "No saved links yet in this browser.";
+      return;
+    }
+
+    const start = (currentPage - 1) * PAGE_SIZE + 1;
+    const end = Math.min(currentPage * PAGE_SIZE, totalEntries);
+    summary.textContent = `Showing ${start}-${end} of ${totalEntries} saved links. Page ${currentPage} of ${totalPages}.`;
+  }
+
+  function render() {
+    const entries = loadEntries();
+    const totalPages = Math.ceil(entries.length / PAGE_SIZE) || 1;
+    const currentPage = getPageFromQuery(totalPages);
+    renderSummary(entries.length, currentPage, totalPages);
+    renderEntries(entries, currentPage);
+    renderPager(totalPages, currentPage);
+  }
+
+  document.getElementById("refresh-link").addEventListener("click", (event) => {
+    event.preventDefault();
+    render();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  render();
+</script>

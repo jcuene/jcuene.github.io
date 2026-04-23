@@ -648,3 +648,290 @@ pre {
     margin-left: 0;
   }
 }
+
+/* ============================================================
+   Newsletter Pages
+   ============================================================ */
+
+.newsletter-tool,
+.newsletter-archive-page {
+  width: min(100%, 980px);
+  margin: 0 auto;
+}
+
+.newsletter-hero {
+  margin-bottom: 1.2rem;
+}
+
+.newsletter-hero .kicker,
+.newsletter-archive-page .eyebrow {
+  margin-bottom: 0.8rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.newsletter-hero h1,
+.newsletter-archive-page h1 {
+  max-width: 14ch;
+  margin: 0;
+  font-size: clamp(2.1rem, 5vw, 3.9rem);
+  line-height: 0.98;
+}
+
+.newsletter-hero .lede,
+.newsletter-archive-page .intro {
+  margin: 1rem 0 0;
+  max-width: 60ch;
+  color: var(--muted);
+  font-size: 1.04rem;
+  line-height: 1.65;
+}
+
+.newsletter-layout {
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: 320px minmax(0, 1fr);
+  align-items: start;
+}
+
+.newsletter-panel,
+.newsletter-tool .entry,
+.newsletter-archive-page .entry {
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.newsletter-panel {
+  padding: 1.35rem;
+}
+
+.newsletter-panel h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.4rem;
+}
+
+.newsletter-tool .small,
+.newsletter-archive-page .meta,
+.newsletter-tool .note,
+.newsletter-archive-page .note,
+.newsletter-archive-page .hint {
+  color: var(--muted);
+  font-family: "DM Sans", "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.newsletter-tool .steps {
+  margin: 1rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--text);
+  font-family: "DM Sans", "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.newsletter-tool .steps li + li {
+  margin-top: 0.6rem;
+}
+
+.newsletter-tool .bookmarklet-wrap {
+  margin: 1rem 0 0.9rem;
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(167, 200, 242, 0.18), rgba(189, 217, 242, 0.32));
+  border: 1px solid rgba(56, 64, 1, 0.1);
+}
+
+.newsletter-tool .bookmarklet {
+  display: inline-block;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  background: var(--accent-deep);
+  color: #eef6ee;
+  font: 700 0.95rem/1 "DM Sans", "Segoe UI", sans-serif;
+  box-shadow: 0 10px 24px rgba(56, 64, 1, 0.18);
+}
+
+.newsletter-tool .bookmarklet:hover {
+  color: #eef6ee;
+  background: var(--accent);
+}
+
+.newsletter-tool .actions,
+.newsletter-archive-page .link-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.newsletter-tool button,
+.newsletter-archive-page .action,
+.newsletter-archive-page .pager button {
+  border: 0;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 0.7rem 0.95rem;
+  font: 600 0.92rem/1 "DM Sans", "Segoe UI", sans-serif;
+  transition: transform 0.12s ease, opacity 0.12s ease, background-color 0.12s ease;
+}
+
+.newsletter-tool button:hover,
+.newsletter-archive-page .action:hover,
+.newsletter-archive-page .pager button:hover {
+  transform: translateY(-1px);
+}
+
+.newsletter-tool .primary,
+.newsletter-archive-page .action.primary {
+  background: var(--accent-deep);
+  color: #eef6ee;
+}
+
+.newsletter-tool .primary:hover,
+.newsletter-archive-page .action.primary:hover {
+  color: #eef6ee;
+  background: var(--accent);
+}
+
+.newsletter-tool .secondary,
+.newsletter-archive-page .action.secondary,
+.newsletter-archive-page .pager button {
+  background: rgba(167, 200, 242, 0.22);
+  color: var(--text);
+  border: 1px solid rgba(56, 64, 1, 0.1);
+}
+
+.newsletter-tool .secondary:hover,
+.newsletter-archive-page .action.secondary:hover,
+.newsletter-archive-page .pager button:hover {
+  color: var(--text);
+  background: rgba(167, 200, 242, 0.32);
+}
+
+.newsletter-tool .entry-list,
+.newsletter-archive-page .entries {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.newsletter-tool .entry,
+.newsletter-archive-page .entry {
+  padding: 1.1rem;
+}
+
+.newsletter-tool .entry-header,
+.newsletter-archive-page .entry-head,
+.newsletter-archive-page .toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.newsletter-tool .entry-header,
+.newsletter-archive-page .entry-head {
+  margin-bottom: 0.7rem;
+}
+
+.newsletter-archive-page .toolbar {
+  align-items: center;
+}
+
+.newsletter-tool .entry-title,
+.newsletter-archive-page .entry-title {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1.15rem;
+  line-height: 1.28;
+}
+
+.newsletter-tool .entry-title:hover,
+.newsletter-archive-page .entry-title:hover {
+  color: var(--accent);
+}
+
+.newsletter-tool .stamp,
+.newsletter-archive-page .stamp {
+  white-space: nowrap;
+  color: var(--muted);
+  font: 0.84rem/1.3 "DM Sans", "Segoe UI", sans-serif;
+}
+
+.newsletter-tool .status {
+  min-height: 1.4em;
+  margin: 0.9rem 0 0;
+  color: var(--accent-deep);
+  font: 600 0.9rem/1.4 "DM Sans", "Segoe UI", sans-serif;
+}
+
+.newsletter-tool .code {
+  margin-top: 0.85rem;
+  padding: 0.8rem 0.9rem;
+  border-radius: var(--radius-md);
+  background: rgba(56, 64, 1, 0.06);
+  color: var(--muted);
+  font: 0.82rem/1.55 "SFMono-Regular", Menlo, Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+
+.newsletter-tool .empty,
+.newsletter-archive-page .empty {
+  border: 1px dashed var(--panel-line);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  color: var(--muted);
+  text-align: center;
+  font: 0.96rem/1.7 "DM Sans", "Segoe UI", sans-serif;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.newsletter-archive-page .newsletter-toolbar-panel {
+  margin-bottom: 1rem;
+}
+
+.newsletter-archive-page .pager {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+
+.newsletter-archive-page .pager button[disabled] {
+  cursor: default;
+  opacity: 0.45;
+  transform: none;
+}
+
+.newsletter-archive-page .hint {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+@media (max-width: 860px) {
+  .newsletter-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .newsletter-panel,
+  .newsletter-tool .entry,
+  .newsletter-archive-page .entry,
+  .newsletter-hero {
+    padding: 1.1rem;
+  }
+
+  .newsletter-archive-page .toolbar {
+    align-items: flex-start;
+  }
+}
