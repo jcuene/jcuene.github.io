@@ -95,13 +95,46 @@ permalink: /newsletter-link-roundup.html
     container.innerHTML = entries.map((entry) => `
       <article class="entry">
         <div class="entry-header">
-          <a class="entry-title" href="${escapeHtml(entry.url)}" target="_blank" rel="noreferrer">${escapeHtml(entry.title)}</a>
-          <div class="stamp">${escapeHtml(formatStamp(entry.capturedAt))}</div>
+          <div class="entry-heading">
+            <a class="entry-title" href="${escapeHtml(entry.url)}" target="_blank" rel="noreferrer">${escapeHtml(entry.title)}</a>
+            <div class="stamp">${escapeHtml(formatStamp(entry.capturedAt))}</div>
+          </div>
+          <button class="secondary entry-copy" type="button" data-entry-id="${escapeHtml(entry.capturedAt)}">Copy</button>
         </div>
         ${entry.quote ? `<blockquote>${escapeHtml(entry.quote)}</blockquote>` : ""}
         ${entry.note ? `<p class="note">${escapeHtml(entry.note)}</p>` : '<p class="note"><em>No note added.</em></p>'}
       </article>
     `).join("");
+
+    container.querySelectorAll(".entry-copy").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const entry = entries.find((item) => item.capturedAt === button.dataset.entryId);
+        if (!entry) {
+          setStatus("I couldn't find that saved entry.");
+          return;
+        }
+
+        const html = toRichHtml([entry]);
+        const text = toPlainText([entry]);
+
+        try {
+          await navigator.clipboard.write([
+            new ClipboardItem({
+              "text/html": new Blob([html], { type: "text/html" }),
+              "text/plain": new Blob([text], { type: "text/plain" })
+            })
+          ]);
+          setStatus(`Copied "${entry.title}" as a single item.`);
+        } catch (error) {
+          try {
+            await navigator.clipboard.writeText(text);
+            setStatus(`Copied "${entry.title}" as plain text.`);
+          } catch (fallbackError) {
+            setStatus("Copy failed in this browser context.");
+          }
+        }
+      });
+    });
   }
 
   function toRichHtml(entries) {

@@ -841,6 +841,15 @@ pre {
   margin-bottom: 0.7rem;
 }
 
+.newsletter-tool .entry-heading {
+  min-width: 0;
+  flex: 1 1 18rem;
+}
+
+.newsletter-tool .entry-copy {
+  flex: 0 0 auto;
+}
+
 .newsletter-archive-page .toolbar {
   align-items: center;
 }
