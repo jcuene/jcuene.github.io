@@ -654,7 +654,8 @@ pre {
    ============================================================ */
 
 .newsletter-tool,
-.newsletter-archive-page {
+.newsletter-archive-page,
+.newsletter-collector-page {
   width: min(100%, 980px);
   margin: 0 auto;
 }
@@ -764,13 +765,16 @@ pre {
 }
 
 .newsletter-tool .actions,
-.newsletter-archive-page .link-row {
+.newsletter-archive-page .link-row,
+.newsletter-collector-page .actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
 }
 
 .newsletter-tool button,
+.newsletter-tool .action,
+.newsletter-collector-page .action,
 .newsletter-archive-page .action,
 .newsletter-archive-page .pager button {
   border: 0;
@@ -782,24 +786,32 @@ pre {
 }
 
 .newsletter-tool button:hover,
+.newsletter-tool .action:hover,
+.newsletter-collector-page .action:hover,
 .newsletter-archive-page .action:hover,
 .newsletter-archive-page .pager button:hover {
   transform: translateY(-1px);
 }
 
 .newsletter-tool .primary,
+.newsletter-tool .action.primary,
+.newsletter-collector-page .action.primary,
 .newsletter-archive-page .action.primary {
   background: var(--accent-deep);
   color: #eef6ee;
 }
 
 .newsletter-tool .primary:hover,
+.newsletter-tool .action.primary:hover,
+.newsletter-collector-page .action.primary:hover,
 .newsletter-archive-page .action.primary:hover {
   color: #eef6ee;
   background: var(--accent);
 }
 
 .newsletter-tool .secondary,
+.newsletter-tool .action.secondary,
+.newsletter-collector-page .action.secondary,
 .newsletter-archive-page .action.secondary,
 .newsletter-archive-page .pager button {
   background: rgba(167, 200, 242, 0.22);
@@ -808,6 +820,8 @@ pre {
 }
 
 .newsletter-tool .secondary:hover,
+.newsletter-tool .action.secondary:hover,
+.newsletter-collector-page .action.secondary:hover,
 .newsletter-archive-page .action.secondary:hover,
 .newsletter-archive-page .pager button:hover {
   color: var(--text);
